@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -14,11 +15,25 @@ type Section = {
   };
 };
 
+type DocumentItem = {
+  id: number;
+  title: string;
+  description?: string;
+  category?: string;
+  date?: string;
+  order?: number;
+  file?: {
+    url: string;
+    name: string;
+  };
+};
+
 export default function EducationSectionPage() {
   const { slug } = useParams();
 
   const [section, setSection] = useState<Section | null>(null);
   const [sections, setSections] = useState<Section[]>([]);
+  const [documents, setDocuments] = useState<DocumentItem[]>([]);
 
   useEffect(() => {
     fetch(
@@ -26,18 +41,17 @@ export default function EducationSectionPage() {
     )
       .then((res) => res.json())
       .then((data) => setSection(data.data?.[0] || null))
-      .catch((error) =>
-        console.error('Ошибка загрузки раздела:', error),
-      );
+      .catch((error) => console.error('Ошибка загрузки раздела:', error));
 
-    fetch(
-      'http://localhost:1337/api/education-sections?sort=order:asc',
-    )
+    fetch('http://localhost:1337/api/education-sections?sort=order:asc')
       .then((res) => res.json())
       .then((data) => setSections(data.data || []))
-      .catch((error) =>
-        console.error('Ошибка загрузки меню:', error),
-      );
+      .catch((error) => console.error('Ошибка загрузки меню:', error));
+
+    fetch('http://localhost:1337/api/documents?sort=order:asc&populate=file')
+      .then((res) => res.json())
+      .then((data) => setDocuments(data.data || []))
+      .catch((error) => console.error('Ошибка загрузки документов:', error));
   }, [slug]);
 
   return (
@@ -51,11 +65,7 @@ export default function EducationSectionPage() {
               <Link
                 key={item.id}
                 to={`/sveden/${item.slug}`}
-                className={
-                  item.slug === slug
-                    ? 'active-link'
-                    : ''
-                }
+                className={item.slug === slug ? 'active-link' : ''}
               >
                 {item.title}
               </Link>
@@ -65,10 +75,37 @@ export default function EducationSectionPage() {
           <section className="sveden-content">
             {section ? (
               <>
-                <h1>{section.title}</h1>
 
                 {section.content && (
-                  <div>{section.content}</div>
+                  <div className="section-content rich-content">
+                    <ReactMarkdown>{section.content}</ReactMarkdown>
+                  </div>
+                )}
+
+                {section.slug === 'dokumenty' && (
+                  <div className="sveden-documents">
+                    {documents.map((doc) => (
+                      <a
+                        key={doc.id}
+                        className="sveden-document-card"
+                        href={
+                          doc.file?.url
+                            ? `http://localhost:1337${doc.file.url}`
+                            : '#'
+                        }
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <div>
+                          <h3>{doc.title}</h3>
+                          {doc.description && <p>{doc.description}</p>}
+                          {doc.category && <span>{doc.category}</span>}
+                        </div>
+
+                        <strong>Скачать</strong>
+                      </a>
+                    ))}
+                  </div>
                 )}
 
                 {section.file?.url && (
@@ -88,6 +125,7 @@ export default function EducationSectionPage() {
           </section>
         </div>
       </main>
+
       <Footer />
     </>
   );

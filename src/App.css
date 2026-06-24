@@ -627,3 +627,92 @@ a {
 .nav-dropdown:hover .dropdown-menu {
   display: block;
 }
+.rich-content {
+  line-height: 1.8;
+  color: #374151;
+}
+
+.rich-content h1,
+.rich-content h2,
+.rich-content h3 {
+  margin-top: 32px;
+  margin-bottom: 16px;
+  color: #1f2937;
+}
+
+.rich-content p {
+  margin-bottom: 16px;
+}
+
+.rich-content ul,
+.rich-content ol {
+  margin: 16px 0;
+  padding-left: 24px;
+}
+
+.rich-content li {
+  margin-bottom: 8px;
+}
+.section-content {
+  line-height: 1.7;
+  font-size: 17px;
+  color: #374151;
+  max-width: 900px;
+}
+
+.section-content h2 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.sveden-content h1 {
+  margin-bottom: 30px;
+}
+
+.section-content p {
+  margin-bottom: 18px;
+}
+.sveden-content {
+  width: 100%;
+}
+
+.section-content {
+  text-align: left;
+}
+.sveden-documents {
+  display: grid;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.sveden-document-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  padding: 18px 22px;
+  border: 1px solid #dbe7f3;
+  border-radius: 16px;
+  background: #fff;
+  text-decoration: none;
+  color: #1f2937;
+}
+
+.sveden-document-card h3 {
+  margin: 0 0 6px;
+}
+
+.sveden-document-card p {
+  margin: 0 0 6px;
+  color: #6b7280;
+}
+
+.sveden-document-card span {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.sveden-document-card strong {
+  color: #2563eb;
+  white-space: nowrap;
+}

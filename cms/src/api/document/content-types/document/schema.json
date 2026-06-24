@@ -14,11 +14,14 @@
       "type": "string",
       "required": true
     },
+    "description": {
+      "type": "text"
+    },
     "category": {
       "type": "string"
     },
-    "date": {
-      "type": "date"
+    "order": {
+      "type": "integer"
     },
     "file": {
       "type": "media",
