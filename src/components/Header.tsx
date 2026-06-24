@@ -5,7 +5,8 @@ export default function Header() {
     <header className="header">
       <div className="container header-inner">
         <Link to="/" className="logo">
-          UMC TEMPUS
+          <img src="/logo-tempus.png" alt="УМЦ Темпус" />
+          <span>УМЦ ТЕМПУС</span>
         </Link>
 
         <nav className="nav">
@@ -14,6 +15,7 @@ export default function Header() {
           <Link to="/news">Новости</Link>
           <Link to="/schedule">Расписание</Link>
           <Link to="/library">Учебная литература</Link>
+          <Link to="/gallery">Фотогалерея</Link>
           <Link to="/contacts">Контакты</Link>
         </nav>
       </div>

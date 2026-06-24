@@ -1,44 +1,31 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-
-type Section = {
-  id: number;
-  title: string;
-  slug: string;
-  content?: string;
-  order?: number;
-};
+import Footer from '../components/Footer';
 
 export default function EducationInfoPage() {
-  const [sections, setSections] = useState<Section[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost:1337/api/education-sections?sort=order:asc')
       .then((res) => res.json())
-      .then((data) => setSections(data.data || []))
+      .then((data) => {
+        const firstSection = data.data?.[0];
+
+        if (firstSection?.slug) {
+          navigate(`/sveden/${firstSection.slug}`, { replace: true });
+        }
+      })
       .catch((error) => console.error('Ошибка загрузки сведений:', error));
-  }, []);
+  }, [navigate]);
 
   return (
     <>
       <Header />
-
       <main className="container page">
-        <h1>Сведения об образовательной организации</h1>
-
-        <div className="sveden-grid">
-          {sections.map((section) => (
-            <Link
-              key={section.id}
-              className="sveden-card"
-              to={`/sveden/${section.slug}`}
-            >
-              {section.title}
-            </Link>
-          ))}
-        </div>
+        <p>Загрузка раздела...</p>
       </main>
+      <Footer />
     </>
   );
 }

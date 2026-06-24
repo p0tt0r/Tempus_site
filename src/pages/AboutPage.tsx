@@ -1,4 +1,5 @@
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function AboutPage() {
   return (
@@ -11,6 +12,7 @@ export default function AboutPage() {
           участниках и направлениях работы.
         </p>
       </main>
+      <Footer />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 type NewsItem = {
   id: number;
@@ -49,6 +50,7 @@ export default function NewsPage() {
           ))}
         </div>
       </main>
+      <Footer />
     </>
   );
 }
