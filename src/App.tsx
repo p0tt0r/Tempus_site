@@ -2,7 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import NewsPage from './pages/NewsPage';
-import DocumentsPage from './pages/DocumentsPage';
+import EducationSectionPage from './pages/EducationSectionPage';
+import EducationInfoPage from './pages/EducationInfoPage';
 import './App.css';
 
 function SimplePage({ title }: { title: string }) {
@@ -21,7 +22,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/news" element={<NewsPage />} />
-        <Route path="/documents" element={<DocumentsPage />} />
+        <Route path="/sveden/:slug" element={<EducationSectionPage />} />
+        <Route path="/sveden" element={<EducationInfoPage />} />
         <Route path="/partners" element={<SimplePage title="Партнёры" />} />
         <Route path="/contacts" element={<SimplePage title="Контакты" />} />
       </Routes>

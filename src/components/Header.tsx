@@ -12,7 +12,7 @@ export default function Header() {
           <Link to="/">Главная</Link>
           <Link to="/about">О проекте</Link>
           <Link to="/news">Новости</Link>
-          <Link to="/documents">Документы</Link>
+          <Link to="/sveden">Сведения об образовательной организации</Link>
           <Link to="/partners">Партнёры</Link>
           <Link to="/contacts">Контакты</Link>
         </nav>
