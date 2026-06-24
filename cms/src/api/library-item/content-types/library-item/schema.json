@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "library_items",
+  "info": {
+    "singularName": "library-item",
+    "pluralName": "library-items",
+    "displayName": "Library Item"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "author": {
+      "type": "string"
+    },
+    "year": {
+      "type": "integer"
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["files"]
+    }
+  }
+}

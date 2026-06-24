@@ -3,17 +3,11 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import NewsPage from './pages/NewsPage';
 import EducationSectionPage from './pages/EducationSectionPage';
+import LibraryPage from './pages/LibraryPage';
 import EducationInfoPage from './pages/EducationInfoPage';
+import SchedulePage from './pages/SchedulePage';
+import ContactsPage from './pages/ContactsPage';
 import './App.css';
-
-function SimplePage({ title }: { title: string }) {
-  return (
-    <main className="container page">
-      <h1>{title}</h1>
-      <p>Раздел находится в разработке.</p>
-    </main>
-  );
-}
 
 function App() {
   return (
@@ -23,9 +17,10 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/sveden/:slug" element={<EducationSectionPage />} />
+        <Route path="/library" element={<LibraryPage />} />
+        <Route path="/schedule" element={<SchedulePage />} />
         <Route path="/sveden" element={<EducationInfoPage />} />
-        <Route path="/partners" element={<SimplePage title="Партнёры" />} />
-        <Route path="/contacts" element={<SimplePage title="Контакты" />} />
+        <Route path="/contacts" element={<ContactsPage/>} />
       </Routes>
     </BrowserRouter>
   );

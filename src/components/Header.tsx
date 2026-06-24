@@ -10,10 +10,10 @@ export default function Header() {
 
         <nav className="nav">
           <Link to="/">Главная</Link>
-          <Link to="/about">О проекте</Link>
-          <Link to="/news">Новости</Link>
           <Link to="/sveden">Сведения об образовательной организации</Link>
-          <Link to="/partners">Партнёры</Link>
+          <Link to="/news">Новости</Link>
+          <Link to="/schedule">Расписание</Link>
+          <Link to="/library">Учебная литература</Link>
           <Link to="/contacts">Контакты</Link>
         </nav>
       </div>

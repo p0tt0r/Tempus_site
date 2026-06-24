@@ -338,3 +338,10 @@ a {
   border-color: #2563eb;
   color: #2563eb;
 }
+.contact-card {
+  background: #fff;
+  border: 1px solid #dbe7f3;
+  border-radius: 18px;
+  padding: 24px;
+  margin-top: 24px;
+}
