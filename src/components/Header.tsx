@@ -16,7 +16,7 @@ export default function Header() {
             <Link to="/sveden/osnovnye-svedeniya">Сведения об образовательной организации</Link>
 
             <div className="dropdown-menu">
-              <div className="dropdown-menu">
+              
                 <Link to="/sveden/osnovnye-svedeniya">Основные сведения</Link>
                 <Link to="/sveden/struktura-i-organy-upravleniya">Структура и органы управления</Link>
                 <Link to="/sveden/dokumenty">Документы</Link>
@@ -31,7 +31,7 @@ export default function Header() {
                 <Link to="/sveden/obrazovatelnye-standarty-i-trebovaniya">Образовательные стандарты и требования</Link>
                 <Link to="/sveden/mezhdunarodnoe-sotrudnichestvo">Международное сотрудничество</Link>
                 <Link to="/sveden/organizatsiya-pitaniya">Организация питания</Link>
-              </div>
+  
             </div>
           </div>
 
