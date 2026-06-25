@@ -6,7 +6,7 @@ export default function Header() {
       <div className="container header-inner">
         <Link to="/" className="logo">
           <img src="/logo-tempus.png" alt="УМЦ Темпус" />
-          <span>УМЦ TEMPUS</span>
+          <span>УМЦ ТЕМПУС</span>
         </Link>
 
         <nav className="nav">
@@ -16,31 +16,40 @@ export default function Header() {
             <Link to="/sveden">Сведения об образовательной организации</Link>
 
             <div className="dropdown-menu">
-              <Link to="/sveden/osnovnye-svedeniya">Основные сведения</Link>
-              <Link to="/sveden/struktura-i-organy-upravleniya-obrazovatelnoj-organizacziej">
-                Структура и органы управления
-              </Link>
-              <Link to="/sveden/dokumenty">Документы</Link>
-              <Link to="/sveden/obrazovanie">Образование</Link>
-              <Link to="/sveden/obrazovatelnye-standarty">Образовательные стандарты</Link>
-              <Link to="/sveden/rukovodstvo-pedagogicheskij-sostav">
-                Руководство. Педагогический состав
-              </Link>
-              <Link to="/sveden/materialno-tehnicheskoe-obespechenie">
-                Материально-техническое обеспечение
-              </Link>
-              <Link to="/sveden/stipendii-i-mery-podderzhki">
-                Стипендии и меры поддержки
-              </Link>
-              <Link to="/sveden/platnye-obrazovatelnye-uslugi">
-                Платные образовательные услуги
-              </Link>
-              <Link to="/sveden/finansovo-hozyajstvennaya-deyatelnost">
-                Финансово-хозяйственная деятельность
-              </Link>
-              <Link to="/sveden/vakantnye-mesta-dlya-priema">
-                Вакантные места для приема
-              </Link>
+              <div className="dropdown-menu">
+                <Link to="/sveden/osnovnye-svedeniya">Основные сведения</Link>
+                <Link to="/sveden/struktura-i-organy-upravleniya-obrazovatelnoj-organizacziej">
+                  Структура и органы управления
+                </Link>
+                <Link to="/sveden/dokumenty">Документы</Link>
+                <Link to="/sveden/obrazovanie">Образование</Link>
+                <Link to="/sveden/rukovodstvo">Руководство</Link>
+                <Link to="/sveden/pedagogicheskij-sostav">Педагогический состав</Link>
+                <Link to="/sveden/materialno-tehnicheskoe-obespechenie">
+                  Материально-техническое обеспечение
+                </Link>
+                <Link to="/sveden/platnye-obrazovatelnye-uslugi">
+                  Платные образовательные услуги
+                </Link>
+                <Link to="/sveden/finansovo-hozyajstvennaya-deyatelnost">
+                  Финансово-хозяйственная деятельность
+                </Link>
+                <Link to="/sveden/vakantnye-mesta-dlya-priema">
+                  Вакантные места для приема
+                </Link>
+                <Link to="/sveden/stipendii-i-mery-podderzhki">
+                  Стипендии и меры поддержки
+                </Link>
+                <Link to="/sveden/obrazovatelnye-standarty">
+                  Образовательные стандарты и требования
+                </Link>
+                <Link to="/sveden/mezhdunarodnoe-sotrudnichestvo">
+                  Международное сотрудничество
+                </Link>
+                <Link to="/sveden/organizacziya-pitaniya">
+                  Организация питания
+                </Link>
+              </div>
             </div>
           </div>
 
