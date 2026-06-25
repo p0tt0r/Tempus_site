@@ -13,6 +13,19 @@ type NewsItem = {
   };
 };
 
+function getPreview(text?: string, length = 160) {
+  if (!text) return '';
+
+  return text
+    .replace(/#{1,6}\s/g, '')
+    .replace(/\*\*/g, '')
+    .replace(/[*_>`]/g, '')
+    .replace(/-\s/g, '')
+    .replace(/\n/g, ' ')
+    .trim()
+    .slice(0, length);
+}
+
 export default function HomePage() {
   const [news, setNews] = useState<NewsItem[]>([]);
 
@@ -89,7 +102,7 @@ export default function HomePage() {
 
                 {item.date && <span className="news-date">{item.date}</span>}
                 <h3>{item.title}</h3>
-                {item.content && <p>{item.content}</p>}
+                {item.content && <p>{getPreview(item.content)}</p>}
               </article>
             ))}
           </div>

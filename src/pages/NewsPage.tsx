@@ -13,6 +13,18 @@ type NewsItem = {
     url: string;
   };
 };
+function getPreview(text?: string, length = 160) {
+  if (!text) return '';
+
+  return text
+    .replace(/#{1,6}\s/g, '')
+    .replace(/\*\*/g, '')
+    .replace(/[*_>`]/g, '')
+    .replace(/-\s/g, '')
+    .replace(/\n/g, ' ')
+    .trim()
+    .slice(0, length);
+}
 
 export default function NewsPage() {
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -62,7 +74,7 @@ export default function NewsPage() {
 
               {item.content && (
                 <p>
-                  {item.content.slice(0, 150)}...
+                  {getPreview(item.content.slice(0, 150))}...
                 </p>
               )}
             </Link>

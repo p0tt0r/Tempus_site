@@ -53,7 +53,7 @@ export default function NewsDetailPage() {
             <h1>{newsItem.title}</h1>
 
             {newsItem.content && (
-              <div className="rich-content">
+              <div className="news-detail-content rich-content">
                 <ReactMarkdown>{newsItem.content}</ReactMarkdown>
               </div>
             )}
