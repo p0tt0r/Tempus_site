@@ -921,157 +921,128 @@ a {
 
   .site-header,
   header {
-    padding: 18px 16px;
+    padding: 10px 14px;
   }
 
   .header-inner {
     flex-direction: column;
-    gap: 18px;
+    gap: 8px;
   }
 
-  .logo {
+  .logo,
+  .logo-area,
+  .brand {
     justify-content: center;
+    gap: 10px;
   }
 
-  .logo img {
-    width: 82px;
-    height: auto;
+  .logo img,
+  .brand img {
+    width: 58px;
+    max-height: 58px;
   }
 
   .logo-text,
-  .site-title {
-    font-size: 28px;
-    line-height: 1.1;
-    text-align: center;
+  .site-title,
+  .brand-title {
+    font-size: 24px;
+    line-height: 1.05;
   }
 
+  nav,
   .nav,
-  nav {
+  .menu {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 14px 22px;
+    gap: 8px 16px;
     padding: 0;
   }
 
+  nav a,
   .nav a,
-  nav a {
-    font-size: 17px;
-    line-height: 1.3;
-    white-space: normal;
+  .menu a,
+  .nav-link {
+    font-size: 15px;
+    line-height: 1.2;
+    padding: 4px 0;
     text-align: center;
   }
 
-  .dropdown-menu {
+  .dropdown-menu,
+  .submenu,
+  .dropdown-content {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100vw - 40px);
-    max-height: 70vh;
+    width: calc(100vw - 48px);
+    max-height: 46vh;
     overflow-y: auto;
-    padding: 14px;
-    border-radius: 18px;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px;
+    border-radius: 16px;
+    z-index: 9999;
   }
 
-  .dropdown-menu a {
+  .dropdown-menu a,
+  .submenu a,
+  .dropdown-content a {
     display: block;
-    font-size: 17px;
-    padding: 12px 10px;
+    font-size: 15px;
+    line-height: 1.25;
+    padding: 11px 10px;
     text-align: center;
   }
 
   .hero {
-    padding: 46px 18px 34px;
-    min-height: auto;
+    padding-top: 34px;
   }
 
   .hero h1 {
-    font-size: 38px;
-    line-height: 1.15;
-    margin-bottom: 18px;
+    font-size: 32px;
+    line-height: 1.12;
   }
 
   .hero p {
-    font-size: 22px;
-    line-height: 1.45;
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .hero-actions a,
-  .hero-actions button {
-    width: 100%;
-    text-align: center;
-  }
-
-  .container,
-  .page {
-    width: 100%;
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-
-  .sections-card,
-  .popular-sections,
-  .info-card {
-    padding: 24px 18px;
-    border-radius: 22px;
-  }
-
-  .sections-card ul {
-    padding-left: 0;
-    list-style-position: inside;
-    text-align: center;
-  }
-
-  .sections-card li {
-    font-size: 18px;
-    margin-bottom: 14px;
-  }
-
-  .cards-grid,
-  .news-grid,
-  .album-grid,
-  .documents-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card,
-  .news-card,
-  .album-card,
-  .document-card {
-    width: 100%;
-  }
-
-  h1 {
-    font-size: 30px;
-  }
-
-  h2 {
-    font-size: 26px;
+    font-size: 19px;
+    line-height: 1.4;
   }
 }
 
 @media (max-width: 430px) {
+  .site-header,
+  header {
+    padding: 8px 12px;
+  }
+
+  .logo img,
+  .brand img {
+    width: 52px;
+    max-height: 52px;
+  }
+
   .logo-text,
-  .site-title {
-    font-size: 25px;
+  .site-title,
+  .brand-title {
+    font-size: 22px;
   }
 
+  nav,
+  .nav,
+  .menu {
+    gap: 7px 13px;
+  }
+
+  nav a,
   .nav a,
-  nav a {
-    font-size: 16px;
+  .menu a,
+  .nav-link {
+    font-size: 14px;
   }
 
-  .hero h1 {
-    font-size: 34px;
-  }
-
-  .hero p {
-    font-size: 20px;
+  .dropdown-menu,
+  .submenu,
+  .dropdown-content {
+    max-height: 42vh;
   }
 }
