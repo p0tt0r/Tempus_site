@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 type NewsItem = {
   id: number;
   title: string;
+  slug:string;
   date?: string;
   content?: string;
   image?: {
@@ -74,7 +75,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="container home-about">
+        <section className="container home-about reveal">
           <h2>О центре</h2>
           <p>
             ЧОУ ДПО УМЦ «Темпус» осуществляет образовательную деятельность
@@ -83,7 +84,7 @@ export default function HomePage() {
           </p>
         </section>
 
-        <section className="container home-section">
+        <section className="container home-sectionr eveal">
           <div className="section-heading">
             <h2>Последние новости</h2>
             <Link to="/news">Все новости →</Link>
@@ -91,7 +92,11 @@ export default function HomePage() {
 
           <div className="news-grid">
             {news.map((item) => (
-              <article key={item.id} className="news-card">
+              <Link
+                key={item.id}
+                to={`/news/${item.slug}`}
+                className="news-card home-news-card reveal"
+              >
                 {item.image?.url && (
                   <img
                     className="news-image"
@@ -101,14 +106,18 @@ export default function HomePage() {
                 )}
 
                 {item.date && <span className="news-date">{item.date}</span>}
+
                 <h3>{item.title}</h3>
-                {item.content && <p>{getPreview(item.content)}</p>}
-              </article>
+
+                {item.content && <p>{getPreview(item.content)}...</p>}
+
+                <strong className="read-more">Читать далее →</strong>
+              </Link>
             ))}
           </div>
         </section>
 
-        <section className="container quick-links">
+        <section className="container quick-links reveal">
           <h2>Популярные разделы</h2>
 
           <div className="quick-links-grid">
