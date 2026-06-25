@@ -6,32 +6,61 @@ import Footer from '../components/Footer';
 
 const API_URL = 'http://185.239.50.50:1337';
 
+type MediaFile = {
+  url: string;
+  name: string;
+};
+
 type PageDocument = {
   id: number;
   title: string;
   description?: string;
   order?: number;
-  file?: {
-    url: string;
-    name: string;
-  } | null;
+  file?: MediaFile | MediaFile[] | null;
 };
 
 type Section = {
   id: number;
   title: string;
   slug: string;
-  main_content?: string;
+  order?: number;
+  content?: string;
   documents?: PageDocument[];
 };
+
+type OldDocumentItem = {
+  id: number;
+  title: string;
+  description?: string;
+  category?: string;
+  date?: string;
+  order?: number;
+  file?: MediaFile | null;
+};
+
+function getFileUrl(file?: MediaFile | MediaFile[] | null) {
+  if (!file) return null;
+
+  if (Array.isArray(file)) {
+    return file[0]?.url ? `${API_URL}${file[0].url}` : null;
+  }
+
+  return file.url ? `${API_URL}${file.url}` : null;
+}
 
 export default function EducationSectionPage() {
   const { slug } = useParams();
 
   const [section, setSection] = useState<Section | null>(null);
   const [sections, setSections] = useState<Section[]>([]);
+  const [documents, setDocuments] = useState<OldDocumentItem[]>([]);
 
   useEffect(() => {
+    fetch(`${API_URL}/api/education-sections?sort=order:asc`)
+      .then((res) => res.json())
+      .then((data) => setSections(data.data || []))
+      .catch((error) => console.error('Ошибка загрузки меню:', error));
+
     fetch(
       `${API_URL}/api/education-sections?filters[slug][$eq]=${slug}&populate[documents][populate]=file`,
     )
@@ -39,13 +68,17 @@ export default function EducationSectionPage() {
       .then((data) => setSection(data.data?.[0] || null))
       .catch((error) => console.error('Ошибка загрузки раздела:', error));
 
-    fetch(`${API_URL}/api/education-sections?sort=order:asc`)
-      .then((res) => res.json())
-      .then((data) => setSections(data.data || []))
-      .catch((error) => console.error('Ошибка загрузки меню:', error));
+    if (slug === 'dokumenty') {
+      fetch(`${API_URL}/api/documents?sort=order:asc&populate=file`)
+        .then((res) => res.json())
+        .then((data) => setDocuments(data.data || []))
+        .catch((error) => console.error('Ошибка загрузки документов:', error));
+    } else {
+      setDocuments([]);
+    }
   }, [slug]);
 
-  const sortedDocuments = [...(section?.documents || [])].sort(
+  const sectionDocuments = [...(section?.documents || [])].sort(
     (a, b) => (a.order ?? 9999) - (b.order ?? 9999),
   );
 
@@ -72,37 +105,63 @@ export default function EducationSectionPage() {
               <>
                 <h1>{section.title}</h1>
 
-                {section.main_content && (
+                {section.content && (
                   <div className="section-content rich-content">
-                    <ReactMarkdown>{section.main_content}</ReactMarkdown>
+                    <ReactMarkdown>{section.content}</ReactMarkdown>
                   </div>
                 )}
 
-                {sortedDocuments.length > 0 && (
+                {slug === 'dokumenty' && documents.length > 0 && (
                   <div className="sveden-documents">
-                    {sortedDocuments.map((doc) => (
-                      <div key={doc.id} className="sveden-document-card">
-                        <div>
-                          <h3>{doc.title}</h3>
+                    {documents.map((doc) => {
+                      const fileUrl = getFileUrl(doc.file);
 
-                          {doc.description && (
-                            <div className="document-description rich-content">
-                              <ReactMarkdown>{doc.description}</ReactMarkdown>
-                            </div>
+                      return (
+                        <a
+                          key={doc.id}
+                          className="sveden-document-card"
+                          href={fileUrl || '#'}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <div>
+                            <h3>{doc.title}</h3>
+                            {doc.description && <p>{doc.description}</p>}
+                            {doc.category && <span>{doc.category}</span>}
+                          </div>
+
+                          <strong>Скачать</strong>
+                        </a>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {slug !== 'dokumenty' && sectionDocuments.length > 0 && (
+                  <div className="sveden-documents">
+                    {sectionDocuments.map((doc) => {
+                      const fileUrl = getFileUrl(doc.file);
+
+                      return (
+                        <div key={doc.id} className="sveden-document-card">
+                          <div>
+                            <h3>{doc.title}</h3>
+
+                            {doc.description && (
+                              <div className="document-description rich-content">
+                                <ReactMarkdown>{doc.description}</ReactMarkdown>
+                              </div>
+                            )}
+                          </div>
+
+                          {fileUrl && (
+                            <a href={fileUrl} target="_blank" rel="noreferrer">
+                              Скачать
+                            </a>
                           )}
                         </div>
-
-                        {doc.file?.url && (
-                          <a
-                            href={`${API_URL}${doc.file.url}`}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Скачать
-                          </a>
-                        )}
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 )}
               </>
