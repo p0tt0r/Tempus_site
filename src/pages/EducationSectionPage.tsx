@@ -60,7 +60,7 @@ export default function EducationSectionPage() {
         setLoading(true);
 
         fetch(
-            `${API_URL}/api/education-sections?pagination[pageSize]=50&populate=*`,
+            `${API_URL}/api/education-sections?sort=order:asc&pagination[pageSize]=50&populate=*`,
         )
             .then((res) => res.json())
             .then((data) => {
