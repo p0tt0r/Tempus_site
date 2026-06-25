@@ -1461,3 +1461,102 @@ button {
     height: auto;
   }
 }
+/* MOBILE HEADER + HERO FINAL */
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 0 !important;
+  }
+
+  .header-inner {
+    height: 86px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 10px 18px !important;
+  }
+
+  .logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .brand-logo {
+    width: 54px !important;
+    height: 54px !important;
+    object-fit: contain !important;
+  }
+
+  .logo span {
+    font-size: 24px !important;
+    line-height: 1.05 !important;
+    font-weight: 800 !important;
+    color: #173b8d !important;
+  }
+
+  .burger {
+    margin-left: auto !important;
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .hero {
+    padding: 54px 0 46px !important;
+  }
+
+  .hero-inner {
+    display: block !important;
+    min-height: auto !important;
+    padding: 0 22px !important;
+    text-align: left !important;
+  }
+
+  .hero h1 {
+    text-align: left !important;
+    font-size: 54px !important;
+    line-height: 1 !important;
+    margin-bottom: 22px !important;
+  }
+
+  .eyebrow {
+    display: block !important;
+    text-align: left !important;
+    font-size: 22px !important;
+    letter-spacing: 0.18em !important;
+    margin-bottom: 22px !important;
+  }
+
+  .hero-text {
+    text-align: left !important;
+    font-size: 26px !important;
+    line-height: 1.45 !important;
+    max-width: none !important;
+  }
+
+  .hero-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    margin-top: 32px !important;
+  }
+
+  .hero-actions .btn {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    min-height: 62px !important;
+    font-size: 20px !important;
+    border-radius: 18px !important;
+  }
+
+  .hero-card {
+    display: none !important;
+  }
+
+  .home-about,
+  .quick-links,
+  .cards {
+    margin-top: 32px !important;
+  }
+}
