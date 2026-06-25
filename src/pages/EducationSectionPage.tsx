@@ -4,28 +4,25 @@ import ReactMarkdown from 'react-markdown';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-type Section = {
-  id: number;
-  title: string;
-  slug: string;
-  content?: string;
-  file?: {
-    url: string;
-    name: string;
-  };
-};
+const API_URL = 'http://185.239.50.50:1337';
 
-type DocumentItem = {
+type PageDocument = {
   id: number;
   title: string;
   description?: string;
-  category?: string;
-  date?: string;
   order?: number;
   file?: {
     url: string;
     name: string;
-  };
+  } | null;
+};
+
+type Section = {
+  id: number;
+  title: string;
+  slug: string;
+  main_content?: string;
+  documents?: PageDocument[];
 };
 
 export default function EducationSectionPage() {
@@ -33,26 +30,24 @@ export default function EducationSectionPage() {
 
   const [section, setSection] = useState<Section | null>(null);
   const [sections, setSections] = useState<Section[]>([]);
-  const [documents, setDocuments] = useState<DocumentItem[]>([]);
 
   useEffect(() => {
     fetch(
-      `http://185.239.50.50:1337/api/education-sections?filters[slug][$eq]=${slug}&populate=file`,
+      `${API_URL}/api/education-sections?filters[slug][$eq]=${slug}&populate[documents][populate]=file`,
     )
       .then((res) => res.json())
       .then((data) => setSection(data.data?.[0] || null))
       .catch((error) => console.error('Ошибка загрузки раздела:', error));
 
-    fetch('http://185.239.50.50:1337/api/education-sections?sort=order:asc')
+    fetch(`${API_URL}/api/education-sections?sort=order:asc`)
       .then((res) => res.json())
       .then((data) => setSections(data.data || []))
       .catch((error) => console.error('Ошибка загрузки меню:', error));
-
-    fetch('http://185.239.50.50:1337/api/documents?sort=order:asc&populate=file')
-      .then((res) => res.json())
-      .then((data) => setDocuments(data.data || []))
-      .catch((error) => console.error('Ошибка загрузки документов:', error));
   }, [slug]);
+
+  const sortedDocuments = [...(section?.documents || [])].sort(
+    (a, b) => (a.order ?? 9999) - (b.order ?? 9999),
+  );
 
   return (
     <>
@@ -75,48 +70,40 @@ export default function EducationSectionPage() {
           <section className="sveden-content">
             {section ? (
               <>
+                <h1>{section.title}</h1>
 
-                {section.content && (
+                {section.main_content && (
                   <div className="section-content rich-content">
-                    <ReactMarkdown>{section.content}</ReactMarkdown>
+                    <ReactMarkdown>{section.main_content}</ReactMarkdown>
                   </div>
                 )}
 
-                {section.slug === 'dokumenty' && (
+                {sortedDocuments.length > 0 && (
                   <div className="sveden-documents">
-                    {documents.map((doc) => (
-                      <a
-                        key={doc.id}
-                        className="sveden-document-card"
-                        href={
-                          doc.file?.url
-                            ? `http://185.239.50.50:1337${doc.file.url}`
-                            : '#'
-                        }
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                    {sortedDocuments.map((doc) => (
+                      <div key={doc.id} className="sveden-document-card">
                         <div>
                           <h3>{doc.title}</h3>
-                          {doc.description && <p>{doc.description}</p>}
-                          {doc.category && <span>{doc.category}</span>}
+
+                          {doc.description && (
+                            <div className="document-description rich-content">
+                              <ReactMarkdown>{doc.description}</ReactMarkdown>
+                            </div>
+                          )}
                         </div>
 
-                        <strong>Скачать</strong>
-                      </a>
+                        {doc.file?.url && (
+                          <a
+                            href={`${API_URL}${doc.file.url}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Скачать
+                          </a>
+                        )}
+                      </div>
                     ))}
                   </div>
-                )}
-
-                {section.file?.url && (
-                  <a
-                    className="document-link"
-                    href={`http://185.239.50.50:1337${section.file.url}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Скачать документ
-                  </a>
                 )}
               </>
             ) : (
