@@ -54,8 +54,11 @@ export default function EducationSectionPage() {
   const [section, setSection] = useState<Section | null>(null);
   const [sections, setSections] = useState<Section[]>([]);
   const [documents, setDocuments] = useState<OldDocumentItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     fetch(`${API_URL}/api/education-sections?sort=order:asc`)
       .then((res) => res.json())
       .then((data) => setSections(data.data || []))
@@ -66,7 +69,8 @@ export default function EducationSectionPage() {
     )
       .then((res) => res.json())
       .then((data) => setSection(data.data?.[0] || null))
-      .catch((error) => console.error('Ошибка загрузки раздела:', error));
+      .catch((error) => console.error('Ошибка загрузки раздела:', error))
+      .finally(() => setLoading(false));
 
     if (slug === 'dokumenty') {
       fetch(`${API_URL}/api/documents?sort=order:asc&populate=file`)
@@ -87,8 +91,8 @@ export default function EducationSectionPage() {
       <Header />
 
       <main className="container page">
-        <div className="sveden-layout">
-          <aside className="sveden-sidebar">
+        <div className="education-layout">
+          <aside className="education-sidebar">
             {sections.map((item) => (
               <Link
                 key={item.id}
@@ -100,12 +104,14 @@ export default function EducationSectionPage() {
             ))}
           </aside>
 
-          <section className="sveden-content">
-            {section ? (
+          <section className="education-content">
+            {loading && <p>Загрузка раздела...</p>}
+
+            {!loading && section ? (
               <>
                 <h1>{section.title}</h1>
 
-                {section.content && (
+                {section.content?.trim() && (
                   <div className="section-content rich-content">
                     <ReactMarkdown>{section.content}</ReactMarkdown>
                   </div>
@@ -126,11 +132,17 @@ export default function EducationSectionPage() {
                         >
                           <div>
                             <h3>{doc.title}</h3>
-                            {doc.description && <p>{doc.description}</p>}
-                            {doc.category && <span>{doc.category}</span>}
+
+                            {doc.description?.trim() && (
+                              <p>{doc.description}</p>
+                            )}
+
+                            {doc.category?.trim() && (
+                              <span>{doc.category}</span>
+                            )}
                           </div>
 
-                          <strong>Скачать</strong>
+                          {fileUrl && <strong>Скачать</strong>}
                         </a>
                       );
                     })}
@@ -147,7 +159,7 @@ export default function EducationSectionPage() {
                           <div>
                             <h3>{doc.title}</h3>
 
-                            {doc.description && (
+                            {doc.description?.trim() && (
                               <div className="document-description rich-content">
                                 <ReactMarkdown>{doc.description}</ReactMarkdown>
                               </div>
@@ -164,9 +176,17 @@ export default function EducationSectionPage() {
                     })}
                   </div>
                 )}
+
+                {slug === 'dokumenty' && documents.length === 0 && (
+                  <p>Документы пока не добавлены.</p>
+                )}
+
+                {slug !== 'dokumenty' && sectionDocuments.length === 0 && (
+                  <p>Документы пока не добавлены.</p>
+                )}
               </>
             ) : (
-              <p>Раздел не найден</p>
+              !loading && <p>Раздел не найден</p>
             )}
           </section>
         </div>
