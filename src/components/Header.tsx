@@ -14,7 +14,7 @@ export default function Header() {
 
 
           <div className="nav-dropdown">
-            <Link to="/sveden/osnovnye-svedeniya">
+            <Link to="/sveden/osnovnye-svedeniya" className="nav-link">
               Сведения об образовательной организации
             </Link>
 
