@@ -26,11 +26,11 @@ export default function ContactsPage() {
     <>
       <Header />
 
-      <main className="container page">
+      <main className="container page reveal">
         <h1>Контакты</h1>
 
         {contact && (
-          <div className="contact-card">
+          <div className="contact-card reveal">
             {contact.address && <p><strong>Адрес:</strong> {contact.address}</p>}
             {contact.phone && <p><strong>Телефон:</strong> {contact.phone}</p>}
             {contact.email && <p><strong>Email:</strong> {contact.email}</p>}

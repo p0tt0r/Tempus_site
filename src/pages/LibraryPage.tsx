@@ -30,11 +30,11 @@ export default function LibraryPage() {
       <main className="container page">
         <h1>Учебная литература по программам</h1>
 
-        <div className="documents-list">
+        <div className="documents-list reveal">
           {items.map((item) => (
             <a
               key={item.id}
-              className="document-item"
+              className="document-item reveal"
               href={item.file?.url ? `http://185.239.50.50:1337${item.file.url}` : '#'}
               target="_blank"
               rel="noreferrer"

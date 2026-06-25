@@ -66,7 +66,7 @@ export default function GalleryPage() {
             <main className="container page">
                 <h1>Фотогалерея</h1>
 
-                <div className="album-grid">
+                <div className="album-grid reveal">
                     {galleries.map((gallery) => {
                         const cover = gallery.images?.[0];
 

@@ -97,7 +97,7 @@ export default function EducationSectionPage() {
 
             <main className="container page">
                 <div className="education-layout">
-                    <aside className="education-sidebar">
+                    <aside className="education-sidebar reveal">
                         {sections.map((item) => (
                             <Link
                                 key={item.id}
@@ -109,7 +109,7 @@ export default function EducationSectionPage() {
                         ))}
                     </aside>
 
-                    <section className="education-content">
+                    <section className="education-content reveal">
                         {loading && <p>Загрузка раздела...</p>}
 
                         {!loading && section ? (
@@ -155,7 +155,7 @@ export default function EducationSectionPage() {
                                 )}
 
                                 {slug !== 'dokumenty' && sectionDocuments.length > 0 && (
-                                    <div className="sveden-documents">
+                                    <div className="sveden-documents reveal">
                                         {sectionDocuments.map((doc) => {
                                             const fileUrl = getFileUrl(doc.file);
 

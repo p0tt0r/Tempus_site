@@ -30,11 +30,11 @@ export default function DocumentsPage() {
       <main className="container page">
         <h1>Документы</h1>
 
-        <div className="documents-list">
+        <div className="documents-list reveal">
           {documents.map((doc) => (
             <a
               key={doc.id}
-              className="document-item"
+              className="document-item reveal"
               href={doc.file?.url ? `http://185.239.50.50:1337${doc.file.url}` : '#'}
               target="_blank"
               rel="noreferrer"
