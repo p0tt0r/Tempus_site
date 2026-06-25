@@ -183,11 +183,11 @@ export default function EducationSectionPage() {
                                 )}
 
                                 {slug === 'dokumenty' && documents.length === 0 && (
-                                    <p>Документы пока не добавлены.</p>
+                                    <p></p>
                                 )}
 
                                 {slug !== 'dokumenty' && sectionDocuments.length === 0 && (
-                                    <p>Документы пока не добавлены.</p>
+                                    <p></p>
                                 )}
                             </>
                         ) : (
