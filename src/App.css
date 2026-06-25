@@ -1046,3 +1046,8 @@ a {
     max-height: 42vh;
   }
 }
+.brand-logo {
+  width: 52px;
+  height: auto;
+  display: block;
+}

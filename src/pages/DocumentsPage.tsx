@@ -17,7 +17,7 @@ export default function DocumentsPage() {
   const [documents, setDocuments] = useState<DocumentItem[]>([]);
 
   useEffect(() => {
-    fetch('http://185.239.50.50:1337/api/documents?sort=date:desc&populate=file')
+    fetch('http://185.239.50.50:1337/api/documents?sort=order:asc&populate=file')
       .then((res) => res.json())
       .then((data) => setDocuments(data.data || []))
       .catch((error) => console.error('Ошибка загрузки документов:', error));

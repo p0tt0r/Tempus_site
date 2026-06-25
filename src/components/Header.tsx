@@ -5,7 +5,7 @@ export default function Header() {
     <header className="header">
       <div className="container header-inner">
         <Link to="/" className="logo">
-          <img src="/logo-tempus.png" alt="УМЦ Темпус" />
+          <img src="/logo-tempus.png" alt="УМЦ Темпус" className="brand-logo" />
           <span>УМЦ ТЕМПУС</span>
         </Link>
 
