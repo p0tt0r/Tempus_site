@@ -483,11 +483,11 @@ export interface ApiContactContact extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    address: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     email: Schema.Attribute.Email;
+    Employee: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

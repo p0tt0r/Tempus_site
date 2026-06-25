@@ -17,7 +17,7 @@ export default function SchedulePage() {
   const [items, setItems] = useState<ScheduleItem[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:1337/api/schedules?sort=date:desc&populate=file')
+    fetch('http://185.239.50.50:1337/api/schedules?sort=date:desc&populate=file')
       .then((res) => res.json())
       .then((data) => setItems(data.data || []))
       .catch((error) => console.error('Ошибка загрузки расписания:', error));
@@ -35,7 +35,7 @@ export default function SchedulePage() {
             <a
               key={item.id}
               className="document-item"
-              href={item.file?.url ? `http://localhost:1337${item.file.url}` : '#'}
+              href={item.file?.url ? `http://185.239.50.50:1337${item.file.url}` : '#'}
               target="_blank"
               rel="noreferrer"
             >

@@ -21,7 +21,7 @@ export default function GalleryPage() {
     const [activeImageIndex, setActiveImageIndex] = useState(0);
 
     useEffect(() => {
-        fetch('http://localhost:1337/api/galleries?sort=date:desc&populate=images')
+        fetch('http://185.239.50.50:1337/api/galleries?sort=date:desc&populate=images')
             .then((res) => res.json())
             .then((data) => setGalleries(data.data || []))
             .catch((error) => console.error('Ошибка загрузки галереи:', error));
@@ -78,7 +78,7 @@ export default function GalleryPage() {
                             >
                                 {cover && (
                                     <img
-                                        src={`http://localhost:1337${cover.url}`}
+                                        src={`http://185.239.50.50:1337${cover.url}`}
                                         alt={gallery.title}
                                     />
                                 )}
@@ -108,7 +108,7 @@ export default function GalleryPage() {
                     </button>
 
                     <img
-                        src={`http://localhost:1337${activeImage.url}`}
+                        src={`http://185.239.50.50:1337${activeImage.url}`}
                         alt={activeImage.name}
                         className="lightbox-image"
                         onClick={(event) => event.stopPropagation()}

@@ -7,7 +7,7 @@ export default function EducationInfoPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:1337/api/education-sections?sort=order:asc')
+    fetch('http://185.239.50.50:1337/api/education-sections?sort=order:asc')
       .then((res) => res.json())
       .then((data) => {
         const firstSection = data.data?.[0];

@@ -19,7 +19,7 @@ export default function NewsPage() {
 
   useEffect(() => {
     fetch(
-      'http://localhost:1337/api/articles?sort=date:desc&populate=*'
+      'http://185.239.50.50:1337/api/articles?sort=date:desc&populate=*'
     )
       .then((res) => res.json())
       .then((data) => {
@@ -47,7 +47,7 @@ export default function NewsPage() {
               {item.image?.url && (
                 <img
                   className="news-image"
-                  src={`http://localhost:1337${item.image.url}`}
+                  src={`http://185.239.50.50:1337${item.image.url}`}
                   alt={item.title}
                 />
               )}

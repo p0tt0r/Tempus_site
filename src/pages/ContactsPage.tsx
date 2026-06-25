@@ -16,7 +16,7 @@ export default function ContactsPage() {
   const [contact, setContact] = useState<Contact | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:1337/api/contacts')
+    fetch('http://185.239.50.50:1337/api/contacts')
       .then((res) => res.json())
       .then((data) => setContact(data.data?.[0] || null))
       .catch((error) => console.error('Ошибка загрузки контактов:', error));

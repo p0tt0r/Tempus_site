@@ -22,3 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# server/runtime backups
+backups/
+cms_backup/
+cms_broken_backup/
+cms_old/
+
+# dependencies/build/runtime
+node_modules/
+dist/
+cms/node_modules/
+cms/.tmp/
+cms/dist/
+.env
+cms/.env

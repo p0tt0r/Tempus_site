@@ -17,7 +17,7 @@ export default function HomePage() {
   const [news, setNews] = useState<NewsItem[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:1337/api/articles?sort=date:desc&pagination[pageSize]=3&populate=image')
+    fetch('http://185.239.50.50:1337/api/articles?sort=date:desc&pagination[pageSize]=3&populate=image')
       .then((res) => res.json())
       .then((data) => setNews(data.data || []))
       .catch((error) => console.error('Ошибка загрузки новостей:', error));
@@ -82,7 +82,7 @@ export default function HomePage() {
                 {item.image?.url && (
                   <img
                     className="news-image"
-                    src={`http://localhost:1337${item.image.url}`}
+                    src={`http://185.239.50.50:1337${item.image.url}`}
                     alt={item.title}
                   />
                 )}

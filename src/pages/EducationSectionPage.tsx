@@ -37,18 +37,18 @@ export default function EducationSectionPage() {
 
   useEffect(() => {
     fetch(
-      `http://localhost:1337/api/education-sections?filters[slug][$eq]=${slug}&populate=file`,
+      `http://185.239.50.50:1337/api/education-sections?filters[slug][$eq]=${slug}&populate=file`,
     )
       .then((res) => res.json())
       .then((data) => setSection(data.data?.[0] || null))
       .catch((error) => console.error('Ошибка загрузки раздела:', error));
 
-    fetch('http://localhost:1337/api/education-sections?sort=order:asc')
+    fetch('http://185.239.50.50:1337/api/education-sections?sort=order:asc')
       .then((res) => res.json())
       .then((data) => setSections(data.data || []))
       .catch((error) => console.error('Ошибка загрузки меню:', error));
 
-    fetch('http://localhost:1337/api/documents?sort=order:asc&populate=file')
+    fetch('http://185.239.50.50:1337/api/documents?sort=order:asc&populate=file')
       .then((res) => res.json())
       .then((data) => setDocuments(data.data || []))
       .catch((error) => console.error('Ошибка загрузки документов:', error));
@@ -90,7 +90,7 @@ export default function EducationSectionPage() {
                         className="sveden-document-card"
                         href={
                           doc.file?.url
-                            ? `http://localhost:1337${doc.file.url}`
+                            ? `http://185.239.50.50:1337${doc.file.url}`
                             : '#'
                         }
                         target="_blank"
@@ -111,7 +111,7 @@ export default function EducationSectionPage() {
                 {section.file?.url && (
                   <a
                     className="document-link"
-                    href={`http://localhost:1337${section.file.url}`}
+                    href={`http://185.239.50.50:1337${section.file.url}`}
                     target="_blank"
                     rel="noreferrer"
                   >
