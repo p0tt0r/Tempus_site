@@ -59,10 +59,13 @@ export default function EducationSectionPage() {
   useEffect(() => {
     setLoading(true);
 
-    fetch(`${API_URL}/api/education-sections?sort=order:asc`)
-      .then((res) => res.json())
-      .then((data) => setSections(data.data || []))
-      .catch((error) => console.error('Ошибка загрузки меню:', error));
+    fetch(`${API_URL}/api/education-sections?sort=order:asc&pagination[pageSize]=50`)
+  .then((res) => res.json())
+  .then((data) => {
+    console.log('SECTIONS MENU:', data.data);
+    setSections(data.data || []);
+  })
+  .catch((error) => console.error('Ошибка загрузки меню:', error));
 
     fetch(
       `${API_URL}/api/education-sections?filters[slug][$eq]=${slug}&populate[documents][populate]=file`,
