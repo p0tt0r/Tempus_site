@@ -12,7 +12,7 @@ export default function Header() {
         <nav className="nav">
           <Link to="/">Главная</Link>
 
-          <div className="nav-dropdown">
+        
             <Link to="/sveden/osnovnye-svedeniya">Сведения об образовательной организации</Link>
 
             <div className="dropdown-menu">
@@ -33,7 +33,7 @@ export default function Header() {
                 <Link to="/sveden/organizatsiya-pitaniya">Организация питания</Link>
   
             </div>
-          </div>
+
 
           <Link to="/news">Новости</Link>
           <Link to="/schedule">Расписание</Link>
