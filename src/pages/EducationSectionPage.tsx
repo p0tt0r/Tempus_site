@@ -55,6 +55,7 @@ export default function EducationSectionPage() {
     const [sections, setSections] = useState<Section[]>([]);
     const [documents, setDocuments] = useState<OldDocumentItem[]>([]);
     const [loading, setLoading] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -96,13 +97,25 @@ export default function EducationSectionPage() {
             <Header />
 
             <main className="container page">
+
+                <button
+                    className="sidebar-toggle"
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                >
+                    {sidebarOpen ? "✕ Закрыть разделы" : "☰ Разделы сведений"}
+                </button>
+
                 <div className="education-layout">
-                    <aside className="education-sidebar reveal">
+                    <aside
+                        className={`education-sidebar reveal ${sidebarOpen ? "open" : ""
+                            }`}
+                    >
                         {sections.map((item) => (
                             <Link
                                 key={item.id}
                                 to={`/sveden/${item.slug}`}
-                                className={item.slug === slug ? 'active-link' : ''}
+                                className={item.slug === slug ? "active-link" : ""}
+                                onClick={() => setSidebarOpen(false)}
                             >
                                 {item.title}
                             </Link>

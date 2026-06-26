@@ -1833,48 +1833,47 @@ button {
 .news-card {
   overflow: hidden !important;
 }
+.sidebar-toggle{
+    display:none;
+}
 
-/* MOBILE EDUCATION SIDEBAR COLLAPSE */
+@media (max-width:768px){
 
-@media (max-width: 768px) {
-  .sveden-layout,
-  .education-layout {
-    display: block !important;
-  }
+.sidebar-toggle{
+    display:block;
+    width:100%;
+    padding:16px;
+    margin-bottom:18px;
 
-  .sveden-sidebar,
-  .education-sidebar {
-    max-height: 92px !important;
-    overflow: hidden !important;
-    position: relative !important;
-    transition: max-height 0.35s ease !important;
-    margin-bottom: 24px !important;
-  }
+    border:none;
+    border-radius:18px;
 
-  .sveden-sidebar::before,
-  .education-sidebar::before {
-    content: "Разделы сведений";
-    display: block;
-    padding: 18px 16px;
-    margin-bottom: 10px;
-    border-radius: 18px;
-    background: #eef3ff;
-    color: #1f4fbf;
-    font-size: 22px;
-    font-weight: 800;
-    text-align: center;
-  }
+    background:#2554d7;
+    color:white;
 
-  .sveden-sidebar:hover,
-  .education-sidebar:hover,
-  .sveden-sidebar:focus-within,
-  .education-sidebar:focus-within {
-    max-height: 1200px !important;
-  }
+    font-size:18px;
+    font-weight:700;
 
-  .sveden-sidebar a,
-  .education-sidebar a {
-    font-size: 18px !important;
-    padding: 14px 10px !important;
-  }
+    cursor:pointer;
+    transition:.25s;
+}
+
+.sidebar-toggle:active{
+    transform:scale(.98);
+}
+
+.education-sidebar{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    margin-bottom:0;
+    transition:.35s;
+}
+
+.education-sidebar.open{
+    max-height:1200px;
+    opacity:1;
+    margin-bottom:20px;
+}
+
 }
