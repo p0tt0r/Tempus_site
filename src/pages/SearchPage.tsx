@@ -106,7 +106,7 @@ export default function SearchPage() {
             <div className="search-results">
               {results.length > 0 ? (
                 results.map((item) => (
-                  <Link key={`${item.type}-${item.id}`} to={item.url} className="search-result-card reveal">
+                  <Link key={`${item.type}-${item.id}`} to={item.url} className="search-result-card">
                     <span>{item.type}</span>
                     <h3>{item.title}</h3>
                     {item.text && <p>{item.text.slice(0, 180)}...</p>}

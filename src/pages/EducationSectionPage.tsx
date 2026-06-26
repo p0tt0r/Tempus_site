@@ -136,7 +136,7 @@ export default function EducationSectionPage() {
                                 )}
 
                                 {slug === 'dokumenty' && documents.length > 0 && (
-                                    <div className="sveden-documents reveal">
+                                    <div className="sveden-documents">
                                         {documents.map((doc) => {
                                             const fileUrl = getFileUrl(doc.file);
 
@@ -168,7 +168,7 @@ export default function EducationSectionPage() {
                                 )}
 
                                 {slug !== 'dokumenty' && sectionDocuments.length > 0 && (
-                                    <div className="sveden-documents reveal">
+                                    <div className="sveden-documents ">
                                         {sectionDocuments.map((doc) => {
                                             const fileUrl = getFileUrl(doc.file);
 
