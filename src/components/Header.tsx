@@ -51,7 +51,6 @@ export default function Header() {
               <Link to="/sveden/obrazovatelnye-standarty-i-trebovaniya">Образовательные стандарты и требования</Link>
               <Link to="/sveden/mezhdunarodnoe-sotrudnichestvo">Международное сотрудничество</Link>
               <Link to="/sveden/organizatsiya-pitaniya">Организация питания</Link>
-              <Link to="/search">Поиск</Link>
             </div>
           </div>
 
@@ -60,6 +59,7 @@ export default function Header() {
           <Link to="/library">Учебная литература</Link>
           <Link to="/gallery">Фотогалерея</Link>
           <Link to="/contacts">Контакты</Link>
+          <Link to="/search">Поиск по сайту</Link>
         </nav>
       </div>
 
@@ -94,7 +94,7 @@ export default function Header() {
             <Link to="/sveden/obrazovatelnye-standarty-i-trebovaniya" onClick={closeMenu}>Образовательные стандарты</Link>
             <Link to="/sveden/mezhdunarodnoe-sotrudnichestvo" onClick={closeMenu}>Международное сотрудничество</Link>
             <Link to="/sveden/organizatsiya-pitaniya" onClick={closeMenu}>Организация питания</Link>
-            <Link to="/search" onClick={closeMenu}>Поиск</Link>
+            
           </div>
         )}
 
@@ -103,6 +103,7 @@ export default function Header() {
         <Link to="/library" onClick={closeMenu}>Учебная литература</Link>
         <Link to="/gallery" onClick={closeMenu}>Фотогалерея</Link>
         <Link to="/contacts" onClick={closeMenu}>Контакты</Link>
+        <Link to="/search" onClick={closeMenu}>Поиск по сайту</Link>
       </aside>
     </header>
   );
