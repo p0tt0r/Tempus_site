@@ -4,9 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useSearchParams } from "react-router-dom";
 
-const [params] = useSearchParams();
 
-const initialSearch = params.get("q") ?? "";
 
 const API_URL = 'http://185.239.50.50:1337';
 
@@ -32,6 +30,9 @@ function cleanText(text?: string) {
 }
 
 export default function SearchPage() {
+  const [params] = useSearchParams();
+
+  const initialSearch = params.get("q") ?? "";
   const [query, setQuery] = useState(initialSearch);
   const [items, setItems] = useState<SearchItem[]>([]);
   const [loading, setLoading] = useState(true);
