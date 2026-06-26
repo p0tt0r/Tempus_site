@@ -32,8 +32,7 @@ function cleanText(text?: string) {
 export default function SearchPage() {
   const [params] = useSearchParams();
 
-  const initialSearch = params.get("q") ?? "";
-  const [query, setQuery] = useState(initialSearch);
+  const [query, setQuery] = useState(params.get("q") ?? "");
   const [items, setItems] = useState<SearchItem[]>([]);
   const [loading, setLoading] = useState(true);
 
