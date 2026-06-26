@@ -14,7 +14,7 @@ export default function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <Link to="/" className="logo" onClick={closeMenu}>
-          <img src="/logo-tempus.png" alt="УМЦ Темпус" className="brand-logo" />
+          <img src="/logo-tempus1.png" alt="УМЦ Темпус" className="brand-logo" />
           <span>УМЦ ТЕМПУС</span>
         </Link>
 
