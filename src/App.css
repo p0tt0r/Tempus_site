@@ -1877,3 +1877,69 @@ button {
 }
 
 }
+/* MOBILE SIDEBAR BUTTON VERSION */
+
+.sidebar-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .education-layout,
+  .sveden-layout {
+    display: block !important;
+  }
+
+  .sidebar-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+
+    width: 100% !important;
+    min-height: 64px !important;
+    margin: 0 0 20px !important;
+    padding: 18px 22px !important;
+
+    border: none !important;
+    border-radius: 24px !important;
+    background: #3156d4 !important;
+    color: #ffffff !important;
+
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    cursor: pointer !important;
+  }
+
+  .education-sidebar,
+  .sveden-sidebar {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-width: 0 !important;
+
+    transition:
+      max-height 0.35s ease,
+      opacity 0.25s ease,
+      padding 0.25s ease,
+      margin 0.25s ease !important;
+  }
+
+  .education-sidebar.open,
+  .sveden-sidebar.open {
+    max-height: 2200px !important;
+    opacity: 1 !important;
+    padding: 18px !important;
+    margin-bottom: 24px !important;
+    border-width: 1px !important;
+  }
+
+  .education-sidebar a,
+  .sveden-sidebar a {
+    font-size: 18px !important;
+    line-height: 1.35 !important;
+    padding: 14px 12px !important;
+    text-align: center !important;
+  }
+}

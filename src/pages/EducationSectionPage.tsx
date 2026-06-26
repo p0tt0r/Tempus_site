@@ -107,7 +107,7 @@ export default function EducationSectionPage() {
 
                 <div className="education-layout">
                     <aside
-                        className={`education-sidebar reveal ${sidebarOpen ? "open" : ""
+                        className={`education-sidebar ${sidebarOpen ? "open" : ""
                             }`}
                     >
                         {sections.map((item) => (
@@ -122,7 +122,7 @@ export default function EducationSectionPage() {
                         ))}
                     </aside>
 
-                    <section className="education-content reveal">
+                    <section className="education-content">
                         {loading && <p>Загрузка раздела...</p>}
 
                         {!loading && section ? (
@@ -136,7 +136,7 @@ export default function EducationSectionPage() {
                                 )}
 
                                 {slug === 'dokumenty' && documents.length > 0 && (
-                                    <div className="sveden-documents">
+                                    <div className="sveden-documents reveal">
                                         {documents.map((doc) => {
                                             const fileUrl = getFileUrl(doc.file);
 
