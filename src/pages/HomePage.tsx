@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useNavigate } from "react-router-dom";
+
+
 
 type NewsItem = {
   id: number;
   title: string;
-  slug:string;
+  slug: string;
   date?: string;
   content?: string;
   image?: {
@@ -29,6 +32,18 @@ function getPreview(text?: string, length = 160) {
 
 export default function HomePage() {
   const [news, setNews] = useState<NewsItem[]>([]);
+  const [searchText, setSearchText] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    const value = searchText.trim();
+
+    if (value) {
+      navigate(`/search?q=${encodeURIComponent(value)}`);
+    } else {
+      navigate('/search');
+    }
+  };
 
   useEffect(() => {
     fetch('http://185.239.50.50:1337/api/articles?sort=date:desc&pagination[pageSize]=3&populate=image')
@@ -127,6 +142,28 @@ export default function HomePage() {
             <Link to="/library">Учебная литература</Link>
             <Link to="/gallery">Фотогалерея</Link>
             <Link to="/contacts">Контакты</Link>
+          </div>
+        </section>
+        <section className="container search-preview reveal">
+          <div className="search-preview-card">
+            <h2>Поиск по сайту</h2>
+            <p>Быстро найдите нужный документ, новость или раздел сайта.</p>
+
+            <div className="search-preview-form">
+              <input
+                type="text"
+                placeholder="Введите запрос..."
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleSearch();
+                }}
+              />
+
+              <button type="button" onClick={handleSearch}>
+                Найти
+              </button>
+            </div>
           </div>
         </section>
       </main>
