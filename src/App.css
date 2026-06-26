@@ -1943,3 +1943,37 @@ button {
     text-align: center !important;
   }
 }
+/* DESKTOP EDUCATION SIDEBAR FIX ONLY */
+
+@media (min-width: 769px) {
+  .education-sidebar,
+  .sveden-sidebar {
+    position: sticky !important;
+    top: 110px !important;
+
+    max-height: calc(100vh - 140px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    scrollbar-width: thin !important;
+    scrollbar-color: #c7d2fe transparent !important;
+  }
+
+  .education-sidebar::-webkit-scrollbar,
+  .sveden-sidebar::-webkit-scrollbar {
+    width: 6px !important;
+  }
+
+  .education-sidebar::-webkit-scrollbar-thumb,
+  .sveden-sidebar::-webkit-scrollbar-thumb {
+    background: #c7d2fe !important;
+    border-radius: 999px !important;
+  }
+
+  .education-sidebar a,
+  .sveden-sidebar a {
+    font-size: 14px !important;
+    padding: 9px 10px !important;
+    line-height: 1.3 !important;
+  }
+}
