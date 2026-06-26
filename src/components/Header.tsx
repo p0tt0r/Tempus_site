@@ -51,6 +51,7 @@ export default function Header() {
               <Link to="/sveden/obrazovatelnye-standarty-i-trebovaniya">Образовательные стандарты и требования</Link>
               <Link to="/sveden/mezhdunarodnoe-sotrudnichestvo">Международное сотрудничество</Link>
               <Link to="/sveden/organizatsiya-pitaniya">Организация питания</Link>
+              <Link to="/search">Поиск</Link>
             </div>
           </div>
 
@@ -93,6 +94,7 @@ export default function Header() {
             <Link to="/sveden/obrazovatelnye-standarty-i-trebovaniya" onClick={closeMenu}>Образовательные стандарты</Link>
             <Link to="/sveden/mezhdunarodnoe-sotrudnichestvo" onClick={closeMenu}>Международное сотрудничество</Link>
             <Link to="/sveden/organizatsiya-pitaniya" onClick={closeMenu}>Организация питания</Link>
+            <Link to="/search" onClick={closeMenu}>Поиск</Link>
           </div>
         )}
 

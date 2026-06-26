@@ -9,6 +9,7 @@ import SchedulePage from './pages/SchedulePage';
 import ContactsPage from './pages/ContactsPage';
 import GalleryPage from './pages/GalleryPage';
 import NewsDetailPage from './pages/NewsDetailPage';
+import SearchPage from './pages/SearchPage';
 import './App.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/schedule" element={<SchedulePage />} />
         <Route path="/sveden" element={<EducationInfoPage />} />
         <Route path="/contacts" element={<ContactsPage/>} />
+        <Route path="/search" element={<SearchPage />} />
       </Routes>
     </BrowserRouter>
   );
