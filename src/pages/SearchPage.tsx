@@ -89,7 +89,7 @@ export default function SearchPage() {
       <Header />
 
       <main className="container page">
-        <section className="search-page reveal">
+        <section className="search-page">
           <h1>Поиск по сайту</h1>
 
           <input
