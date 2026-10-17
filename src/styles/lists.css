@@ -1,0 +1,122 @@
+/* Общие: список файлов (документы, расписание, литература) и сообщения о состоянии.
+   Размеры в rem — масштабируются версией для слабовидящих. */
+
+.file-list {
+  max-width: 72ch;
+  margin-top: 32px;
+}
+
+.file-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 0;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.file-row:nth-child(odd) {
+  background: var(--tint);
+  padding-inline: 16px;
+  margin-inline: -16px;
+}
+
+.file-row h3 {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.file-row p,
+.file-row span,
+.file-row-desc {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.file-row time {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.file-row-desc > :last-child {
+  margin-bottom: 0;
+}
+
+.file-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: none;
+  gap: 2px;
+}
+
+.file-action strong,
+.file-action a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.file-meta {
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+a.file-row:hover h3,
+a.file-row:hover .file-action strong {
+  text-decoration: underline;
+}
+
+@media (min-width: 769px) {
+  .file-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .file-action {
+    align-items: flex-end;
+  }
+}
+
+/* ---- состояния загрузки / ошибки / пустого списка ---- */
+.status-message {
+  margin: 0 0 16px;
+  padding: 16px;
+  border: 0;
+  border-radius: 0;
+  background: var(--tint);
+  color: var(--ink);
+}
+
+.status-message--error {
+  background: #fdecec;
+  color: #8a1c1c;
+}
+
+/* ---- страницы «Расписание» и «Учебная литература» ---- */
+.list-page {
+  padding: 24px 0 56px;
+}
+
+.list-page h1 {
+  margin: 0 0 28px;
+}
+
+.list-page .file-list {
+  margin-top: 0;
+}
+
+@media (min-width: 981px) {
+  .list-page {
+    padding: 40px 0 80px;
+  }
+}

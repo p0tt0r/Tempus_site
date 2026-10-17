@@ -42,6 +42,25 @@ export default function GalleryPage() {
     }, []);
 
     const activeImage = activeGallery?.images?.[activeImageIndex];
+    const imageCount = activeGallery?.images?.length ?? 0;
+
+    useEffect(() => {
+        if (!activeGallery || imageCount === 0) return;
+
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setActiveGallery(null);
+                setActiveImageIndex(0);
+            } else if (event.key === 'ArrowLeft') {
+                setActiveImageIndex((current) => (current === 0 ? imageCount - 1 : current - 1));
+            } else if (event.key === 'ArrowRight') {
+                setActiveImageIndex((current) => (current === imageCount - 1 ? 0 : current + 1));
+            }
+        };
+
+        window.addEventListener('keydown', onKeyDown);
+        return () => window.removeEventListener('keydown', onKeyDown);
+    }, [activeGallery, imageCount]);
 
     const openGallery = (gallery: GalleryItem) => {
         setActiveGallery(gallery);
@@ -77,7 +96,7 @@ export default function GalleryPage() {
         <>
             <Header />
 
-            <main id="main" className="container page">
+            <main id="main" className="container gallery-page">
                 <h1>Фотогалерея</h1>
 
                 {loading && <StatusMessage>Загрузка…</StatusMessage>}
@@ -90,13 +109,14 @@ export default function GalleryPage() {
                     <StatusMessage>Фотоальбомы пока не добавлены.</StatusMessage>
                 )}
 
-                <div className="album-grid reveal">
+                <div className="album-grid">
                     {galleries.map((gallery) => {
                         const cover = gallery.images?.[0];
 
                         return (
                             <button
                                 key={gallery.id}
+                                type="button"
                                 className="album-card"
                                 onClick={() => openGallery(gallery)}
                             >
@@ -122,12 +142,12 @@ export default function GalleryPage() {
             </main>
 
             {activeGallery && activeImage && (
-                <div className="lightbox" onClick={closeGallery}>
-                    <button className="lightbox-close" onClick={closeGallery}>
+                <div className="lightbox" role="dialog" aria-modal="true" aria-label={activeGallery.title} onClick={closeGallery}>
+                    <button type="button" className="lightbox-close" aria-label="Закрыть" onClick={closeGallery}>
                         ×
                     </button>
 
-                    <button className="lightbox-arrow left" onClick={showPrev}>
+                    <button type="button" className="lightbox-arrow left" aria-label="Предыдущее фото" onClick={showPrev}>
                         ‹
                     </button>
 
@@ -138,7 +158,7 @@ export default function GalleryPage() {
                         onClick={(event) => event.stopPropagation()}
                     />
 
-                    <button className="lightbox-arrow right" onClick={showNext}>
+                    <button type="button" className="lightbox-arrow right" aria-label="Следующее фото" onClick={showNext}>
                         ›
                     </button>
 

@@ -54,7 +54,7 @@ export default function ContactsPage() {
     <>
       <Header />
 
-      <main id="main" className="container page reveal">
+      <main id="main" className="container contacts-page">
         <h1>Контакты</h1>
 
         {loading && <StatusMessage>Загрузка…</StatusMessage>}
@@ -70,7 +70,7 @@ export default function ContactsPage() {
         {contacts.length > 0 && (
           <div className="contacts-grid">
             {contacts.map((c) => (
-              <div className="contact-card reveal" key={c.id}>
+              <div className="contact-card" key={c.id}>
                 <h2>{c.title}</h2>
                 {getRole(c) && <p className="contact-role">{getRole(c)}</p>}
                 {c.address && <p><strong>Адрес:</strong> {c.address}</p>}

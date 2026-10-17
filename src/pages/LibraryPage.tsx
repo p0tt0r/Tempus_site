@@ -43,7 +43,7 @@ export default function LibraryPage() {
     <>
       <Header />
 
-      <main id="main" className="container page">
+      <main id="main" className="container list-page">
         <h1>Учебная литература по программам</h1>
 
         {loading && <StatusMessage>Загрузка…</StatusMessage>}
@@ -56,7 +56,7 @@ export default function LibraryPage() {
           <StatusMessage>Учебная литература пока не добавлена.</StatusMessage>
         )}
 
-        <div className="documents-list reveal">
+        <div className="file-list">
           {items.map((item) => {
             const meta = formatFileInfo(item.file);
             const content = (
@@ -78,7 +78,7 @@ export default function LibraryPage() {
             return item.file?.url ? (
               <a
                 key={item.id}
-                className="document-item reveal"
+                className="file-row"
                 href={item.file.url}
                 target="_blank"
                 rel="noreferrer"
@@ -86,7 +86,7 @@ export default function LibraryPage() {
                 {content}
               </a>
             ) : (
-              <div key={item.id} className="document-item reveal">
+              <div key={item.id} className="file-row">
                 {content}
               </div>
             );

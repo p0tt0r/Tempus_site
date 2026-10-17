@@ -44,7 +44,7 @@ export default function SchedulePage() {
     <>
       <Header />
 
-      <main id="main" className="container page">
+      <main id="main" className="container list-page">
         <h1>Расписание</h1>
 
         {loading && <StatusMessage>Загрузка…</StatusMessage>}
@@ -57,7 +57,7 @@ export default function SchedulePage() {
           <StatusMessage>Расписание пока не опубликовано.</StatusMessage>
         )}
 
-        <div className="documents-list">
+        <div className="file-list">
           {items.map((item) => {
             const meta = formatFileInfo(item.file);
             const content = (
@@ -79,7 +79,7 @@ export default function SchedulePage() {
             return item.file?.url ? (
               <a
                 key={item.id}
-                className="document-item"
+                className="file-row"
                 href={item.file.url}
                 target="_blank"
                 rel="noreferrer"
@@ -87,7 +87,7 @@ export default function SchedulePage() {
                 {content}
               </a>
             ) : (
-              <div key={item.id} className="document-item">
+              <div key={item.id} className="file-row">
                 {content}
               </div>
             );

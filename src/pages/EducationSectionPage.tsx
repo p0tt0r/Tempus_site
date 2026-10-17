@@ -190,7 +190,7 @@ export default function EducationSectionPage() {
                                 )}
 
                                 {slug === 'dokumenty' && documents.length > 0 && (
-                                    <div className="sveden-documents">
+                                    <div className="file-list">
                                         {documents.map((doc) => {
                                             const fileUrl = getFileUrl(doc.file);
                                             const meta = formatFileInfo(getFirstFile(doc.file));
@@ -221,7 +221,7 @@ export default function EducationSectionPage() {
                                             return fileUrl ? (
                                                 <a
                                                     key={doc.id}
-                                                    className="sveden-doc"
+                                                    className="file-row"
                                                     href={fileUrl}
                                                     target="_blank"
                                                     rel="noreferrer"
@@ -229,7 +229,7 @@ export default function EducationSectionPage() {
                                                     {content}
                                                 </a>
                                             ) : (
-                                                <div key={doc.id} className="sveden-doc">
+                                                <div key={doc.id} className="file-row">
                                                     {content}
                                                 </div>
                                             );
@@ -238,18 +238,18 @@ export default function EducationSectionPage() {
                                 )}
 
                                 {slug !== 'dokumenty' && sectionDocuments.length > 0 && (
-                                    <div className="sveden-documents">
+                                    <div className="file-list">
                                         {sectionDocuments.map((doc) => {
                                             const fileUrl = getFileUrl(doc.file);
                                             const meta = formatFileInfo(getFirstFile(doc.file));
 
                                             return (
-                                                <div key={doc.id} className="sveden-doc">
+                                                <div key={doc.id} className="file-row">
                                                     <div>
                                                         <h3>{doc.title}</h3>
 
                                                         {doc.description?.trim() && (
-                                                            <div className="sveden-text sveden-doc-desc">
+                                                            <div className="sveden-text file-row-desc">
                                                                 <ReactMarkdown>{doc.description}</ReactMarkdown>
                                                             </div>
                                                         )}
