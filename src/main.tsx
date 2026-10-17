@@ -13,6 +13,7 @@ import './styles/news.css'
 import './styles/lists.css'
 import './styles/gallery.css'
 import './styles/contacts.css'
+import './styles/misc.css'
 import './styles/low-vision.css'
 
 createRoot(document.getElementById('root')!).render(

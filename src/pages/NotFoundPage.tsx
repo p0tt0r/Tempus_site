@@ -15,17 +15,17 @@ export default function NotFoundPage() {
   return (
     <>
       <Header />
-      <main id="main" className="container page not-found-page">
+      <main id="main" className="container not-found">
         <h1>Страница не найдена</h1>
         <p>Возможно, страница была перемещена или адрес введён с ошибкой.</p>
         <div className="not-found-actions">
-          <Link to="/" className="btn primary">
+          <Link to="/" className="btn">
             На главную
           </Link>
-          <Link to="/sveden" className="btn secondary">
+          <Link to="/sveden" className="link-arrow">
             Сведения об организации
           </Link>
-          <Link to="/search" className="btn secondary">
+          <Link to="/search" className="link-arrow">
             Поиск по сайту
           </Link>
         </div>

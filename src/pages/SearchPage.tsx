@@ -110,40 +110,42 @@ export default function SearchPage() {
     <>
       <Header />
 
-      <main id="main" className="container page">
-        <section className="search-page">
-          <h1>Поиск по сайту</h1>
+      <main id="main" className="container search-page">
+        <h1>Поиск по сайту</h1>
 
-          <input
-            className="search-input"
-            type="text"
-            placeholder="Введите запрос..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
+        <label className="search-label" htmlFor="site-search">
+          Поиск по сайту
+        </label>
+        <input
+          id="site-search"
+          className="search-input"
+          type="text"
+          placeholder="Введите запрос..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
 
-          {loading ? (
-            <StatusMessage>Загрузка…</StatusMessage>
-          ) : error ? (
-            <StatusMessage variant="error">
-              Не удалось загрузить данные. Попробуйте обновить страницу позже.
-            </StatusMessage>
-          ) : (
-            <div className="search-results">
-              {results.length > 0 ? (
-                results.map((item) => (
-                  <Link key={`${item.type}-${item.id}`} to={item.url} className="search-result-card">
-                    <span>{item.type}</span>
-                    <h3>{item.title}</h3>
-                    {item.text && <p>{item.text.slice(0, 180)}...</p>}
-                  </Link>
-                ))
-              ) : (
-                <StatusMessage>Ничего не найдено.</StatusMessage>
-              )}
-            </div>
-          )}
-        </section>
+        {loading ? (
+          <StatusMessage>Загрузка…</StatusMessage>
+        ) : error ? (
+          <StatusMessage variant="error">
+            Не удалось загрузить данные. Попробуйте обновить страницу позже.
+          </StatusMessage>
+        ) : (
+          <div className="search-results">
+            {results.length > 0 ? (
+              results.map((item) => (
+                <Link key={`${item.type}-${item.id}`} to={item.url} className="search-result">
+                  <span>{item.type}</span>
+                  <h3>{item.title}</h3>
+                  {item.text && <p>{item.text.slice(0, 180)}...</p>}
+                </Link>
+              ))
+            ) : (
+              <StatusMessage>Ничего не найдено.</StatusMessage>
+            )}
+          </div>
+        )}
       </main>
 
       <Footer />
