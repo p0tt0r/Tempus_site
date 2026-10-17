@@ -60,7 +60,7 @@ export default function HomePage() {
         <section className="hero">
           <div className="container hero-inner">
             <div>
-              <p className="eyebrow">Образовательный центр</p>
+              <p className="eyebrow">Частное образовательное учреждение дополнительного профессионального образования</p>
               <h1>УМЦ Темпус</h1>
               <p className="hero-text">
                 Информационный сайт центра: сведения об образовательной организации,
@@ -80,11 +80,11 @@ export default function HomePage() {
             <div className="hero-card">
               <h3>Разделы сайта</h3>
               <ul>
-                <li>Основные сведения</li>
-                <li>Документы</li>
-                <li>Образование</li>
-                <li>Расписание</li>
-                <li>Учебная литература</li>
+                <li><Link to="/sveden/osnovnye-svedeniya">Основные сведения</Link></li>
+                <li><Link to="/sveden/dokumenty">Документы</Link></li>
+                <li><Link to="/sveden/obrazovanie">Образование</Link></li>
+                <li><Link to="/schedule">Расписание</Link></li>
+                <li><Link to="/library">Учебная литература</Link></li>
               </ul>
             </div>
           </div>

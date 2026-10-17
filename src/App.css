@@ -214,8 +214,7 @@ h3 {
 .hero {
   padding: 76px 0;
   background:
-    linear-gradient(135deg, rgba(31, 104, 193, 0.92), rgba(38, 173, 221, 0.84)),
-    url('/src/assets/hero-bg.jpg');
+    linear-gradient(135deg, rgba(31, 104, 193, 0.92), rgba(38, 173, 221, 0.84));
   background-size: cover;
   background-position: center;
   color: var(--white);
@@ -230,9 +229,12 @@ h3 {
 
 .eyebrow {
   margin: 0 0 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 16px;
+  line-height: 1.4;
+  max-width: 34em;
+  overflow-wrap: anywhere;
   opacity: 0.9;
 }
 
@@ -289,6 +291,27 @@ h3 {
 
 .hero-card li {
   margin: 12px 0;
+}
+
+.hero-card li a {
+  display: block;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.13);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.hero-card li a::after {
+  content: '→';
+  float: right;
+  opacity: 0.7;
+}
+
+.hero-card li a:hover {
+  background: rgba(255, 255, 255, 0.22);
 }
 
 /* COMMON SECTIONS */
@@ -1204,7 +1227,7 @@ h3 {
 
 .eyebrow {
   color: rgba(255, 255, 255, 0.85) !important;
-  font-weight: 700 !important;
+  font-weight: 500 !important;
 }
 
 .hero-text {
@@ -1258,11 +1281,18 @@ h3 {
 
 .hero-card li {
   margin: 12px 0 !important;
+}
+
+.hero-card li a {
   padding: 14px 16px !important;
   border-radius: 14px !important;
   background: rgba(255, 255, 255, 0.13) !important;
   color: #ffffff !important;
   font-weight: 600 !important;
+}
+
+.hero-card li a:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
 }
 
 .home-about {
@@ -1524,8 +1554,8 @@ h3 {
   .eyebrow {
     display: block !important;
     text-align: left !important;
-    font-size: 22px !important;
-    letter-spacing: 0.18em !important;
+    font-size: 15px !important;
+    letter-spacing: 0 !important;
     margin-bottom: 22px !important;
   }
 
