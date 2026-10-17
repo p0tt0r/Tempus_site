@@ -1,0 +1,95 @@
+/* Движение: только transform/opacity. Всё внутри no-preference; в html[data-lv="on"] выключено.
+   Без поддержки animation-timeline элементы просто видны (начального скрытия нет нигде). */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* отклик */
+  .btn,
+  .home-tasks a,
+  .news-card,
+  .file-row {
+    transition: transform 0.2s ease;
+  }
+
+  .btn:hover,
+  .home-tasks a:hover,
+  .news-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn:active,
+  .home-tasks a:active,
+  .news-card:active {
+    transform: scale(0.98);
+  }
+
+  /* выпадающее меню: появление при display none -> block */
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown:focus-within .dropdown-menu {
+    animation: menu-in 0.15s ease-out;
+  }
+
+  /* появление при прокрутке: прозрачность 1 к моменту, когда элемент заметно вошёл в окно */
+  @supports (animation-timeline: view()) {
+    @keyframes reveal-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .reveal,
+    .home-program-inner,
+    .home-news-head,
+    .news-card,
+    .home-tasks a,
+    .file-row,
+    .news-page > h1,
+    .sveden-text > h2 {
+      animation: reveal-up linear backwards;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+
+    /* каскад — сдвигом диапазона, а не задержкой (задержка не работает с timeline) */
+    .news-card:nth-child(3n + 2),
+    .home-tasks a:nth-child(2) {
+      animation-range: entry 6% entry 36%;
+    }
+
+    .news-card:nth-child(3n),
+    .home-tasks a:nth-child(3) {
+      animation-range: entry 12% entry 42%;
+    }
+  }
+}
+
+html[data-lv='on'] *,
+html[data-lv='on'] *::before,
+html[data-lv='on'] *::after {
+  animation: none;
+  transition: none;
+}
+
+html[data-lv='on'] .btn:hover,
+html[data-lv='on'] .btn:active,
+html[data-lv='on'] .home-tasks a:hover,
+html[data-lv='on'] .home-tasks a:active,
+html[data-lv='on'] .news-card:hover,
+html[data-lv='on'] .news-card:active {
+  transform: none;
+}
