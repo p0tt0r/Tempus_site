@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="footer-logo-row">
             <img src="/logo-tempus1.png" alt="УМЦ Темпус" />
             <div>
-              <strong>УМЦ TEMPUS</strong>
+              <strong>УМЦ ТЕМПУС</strong>
               <span>Учебно-методический центр</span>
             </div>
           </div>
@@ -42,7 +42,7 @@ export default function Footer() {
       </div>
 
       <div className="container footer-bottom">
-        <span>© 2026 УМЦ TEMPUS. Все права защищены.</span>
+        <span>© 2026 ЧОУ ДПО УМЦ «Темпус». Все права защищены.</span>
         <Link to="/search">Поиск по сайту</Link>
       </div>
     </footer>
