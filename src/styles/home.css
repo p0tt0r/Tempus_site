@@ -1,0 +1,321 @@
+/* Главная */
+
+/* ---- первый экран ---- */
+.home-hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  min-height: 440px;
+}
+
+.home-hero-text {
+  /* левый край текста совпадает с .container */
+  padding: 60px 40px 60px max(16px, calc((100vw - 1200px) / 2));
+}
+
+.home-hero h1 {
+  margin: 0 0 20px;
+  font-size: clamp(2.5rem, 4.4vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.home-hero-text p {
+  max-width: 30em;
+  margin: 0 0 26px;
+  font-size: 1.1875rem;
+}
+
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+}
+
+.home-hero-photo {
+  position: relative;
+  min-height: 260px;
+}
+
+.home-hero-photo > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.home-hero-photo .steps {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/* ---- программы ---- */
+.home-status {
+  padding-block: 24px;
+}
+
+.home-program {
+  background: var(--tint);
+  padding: 44px 0;
+}
+
+.home-program--alt {
+  background: var(--ground);
+}
+
+.home-program-inner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 48px;
+}
+
+.home-program-kicker {
+  margin: 0 0 8px;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.home-program h2 {
+  margin: 0 0 14px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.home-program-summary {
+  margin: 0 0 20px;
+  font-size: 1.0625rem;
+}
+
+.home-program-fallback {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 32px;
+}
+
+.home-program-fallback h2 {
+  margin: 0;
+}
+
+.home-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 28px;
+  align-content: start;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.home-facts strong {
+  display: block;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+/* ---- плитки задач ---- */
+.home-tasks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.home-tasks a {
+  display: block;
+  padding: 30px 40px;
+  color: #fff;
+  text-decoration: none;
+  background: var(--tile-1);
+}
+
+.home-tasks a:nth-child(2) {
+  background: var(--tile-2);
+}
+
+.home-tasks a:nth-child(3) {
+  background: var(--tile-3);
+}
+
+.home-task-title {
+  display: block;
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.home-task-text {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.9375rem;
+  opacity: 0.8;
+}
+
+.home-tasks a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -6px;
+}
+
+/* ---- новости ---- */
+.home-news {
+  padding-block: 48px;
+}
+
+.home-news-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: 28px;
+}
+
+.home-news-head h2 {
+  margin: 0;
+}
+
+.home-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.home-news-item {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.home-news-item > img,
+.home-news-placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  margin-bottom: 14px;
+}
+
+.home-news-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tint);
+}
+
+.home-news-placeholder img {
+  width: 40%;
+  max-height: 60%;
+  object-fit: contain;
+}
+
+.home-news-item time {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.home-news-item h3 {
+  margin: 4px 0 0;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.home-news-item:hover h3 {
+  color: var(--accent);
+}
+
+/* ---- планшет и телефон ---- */
+@media (max-width: 980px) {
+  .home-hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .home-hero-photo {
+    order: -1;
+    height: 220px;
+    min-height: 0;
+  }
+
+  .home-hero-text {
+    padding: 28px 16px 30px;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(1.625rem, 8.2vw, 2.75rem);
+  }
+
+  .home-hero-text p {
+    font-size: 1.0625rem;
+    margin-bottom: 20px;
+  }
+
+  .home-hero-actions .btn {
+    width: 100%;
+  }
+
+  .home-program {
+    padding: 32px 0;
+  }
+
+  .home-program-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .home-program h2 {
+    font-size: clamp(1.125rem, 6vw, 1.625rem);
+  }
+
+  .home-facts strong {
+    font-size: 1.375rem;
+  }
+
+  .home-tasks {
+    grid-template-columns: 1fr;
+  }
+
+  .home-tasks a {
+    padding: 20px 16px;
+  }
+
+  .home-task-title {
+    font-size: 1.1875rem;
+  }
+
+  .home-news-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 980px) {
+  .home-news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .home-news-item h3 {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 359px) {
+  .home-news-item h3 {
+    font-size: 1rem;
+  }
+}
+
+/* версия для слабовидящих: плитки различаются рамкой, а не заливкой */
+html[data-lv='on'] .home-tasks a {
+  border-top: 2px solid var(--lv-fg);
+}
+
+html[data-lv='on'] .home-program {
+  border-top: 2px solid var(--lv-fg);
+}

@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import StatusMessage from '../components/StatusMessage';
+import Steps from '../components/Steps';
 import { formatDate } from '../utils/formatDate';
-import { getPreview } from '../utils/newsPreview';
-
-
-
+import { parsePrograms, type Program } from '../utils/programs';
 
 type NewsItem = {
   id: number;
@@ -20,22 +18,21 @@ type NewsItem = {
   };
 };
 
+const PROGRAMS_URL =
+  '/api/education-sections?filters[slug][$eq]=obrazovanie&populate[documents][populate]=file';
+
+const TASKS = [
+  { to: '/schedule', title: 'Расписание', text: 'занятия и экзамены' },
+  { to: '/sveden/dokumenty', title: 'Документы', text: 'устав, лицензия, положения' },
+  { to: '/sveden', title: 'Сведения об организации', text: '14 обязательных разделов' },
+];
+
 export default function HomePage() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [newsLoading, setNewsLoading] = useState(true);
   const [newsError, setNewsError] = useState(false);
-  const [searchText, setSearchText] = useState('');
-  const navigate = useNavigate();
-
-  const handleSearch = () => {
-    const value = searchText.trim();
-
-    if (value) {
-      navigate(`/search?q=${encodeURIComponent(value)}`);
-    } else {
-      navigate('/search');
-    }
-  };
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [programsLoading, setProgramsLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/articles?sort=date:desc&pagination[pageSize]=3&populate=image')
@@ -54,57 +51,112 @@ export default function HomePage() {
       .finally(() => setNewsLoading(false));
   }, []);
 
+  useEffect(() => {
+    fetch(PROGRAMS_URL)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (data.error) throw new Error(data.error.message || 'API error');
+        setPrograms(parsePrograms(data.data?.[0]?.content));
+      })
+      .catch((error) => {
+        console.error('Ошибка загрузки программ:', error);
+        setPrograms([]);
+      })
+      .finally(() => setProgramsLoading(false));
+  }, []);
+
   return (
     <>
       <Header />
 
       <main id="main">
-        <section className="hero">
-          <div className="container hero-inner">
-            <div>
-              <p className="eyebrow">Частное образовательное учреждение дополнительного профессионального образования</p>
-              <h1>УМЦ Темпус</h1>
-              <p className="hero-text">
-                Информационный сайт центра: сведения об образовательной организации,
-                новости, документы, расписание, учебная литература и фотогалерея.
-              </p>
-
-              <div className="hero-actions">
-                <Link to="/sveden" className="btn primary">
-                  Сведения об организации
-                </Link>
-                <Link to="/contacts" className="btn secondary">
-                  Контакты
-                </Link>
-              </div>
+        <section className="home-hero">
+          <div className="home-hero-text">
+            <h1>Новая профессия — ступень за&nbsp;ступенью</h1>
+            <p>
+              ЧОУ ДПО УМЦ «Темпус», Ростов-на-Дону. Профессиональная переподготовка с дипломом
+              для тех, у кого есть или будет высшее образование.
+            </p>
+            <div className="home-hero-actions">
+              <Link to="/sveden/obrazovanie" className="btn">
+                Программы обучения
+              </Link>
+              <Link to="/sveden" className="link-arrow">
+                Сведения об организации
+              </Link>
             </div>
+          </div>
 
-            <div className="hero-card">
-              <h3>Разделы сайта</h3>
-              <ul>
-                <li><Link to="/sveden/osnovnye-svedeniya">Основные сведения</Link></li>
-                <li><Link to="/sveden/dokumenty">Документы</Link></li>
-                <li><Link to="/sveden/obrazovanie">Образование</Link></li>
-                <li><Link to="/schedule">Расписание</Link></li>
-                <li><Link to="/library">Учебная литература</Link></li>
-              </ul>
-            </div>
+          <div className="home-hero-photo">
+            <img src="/images/hero.jpg" alt="Занятие в учебном центре «Темпус»" />
+            <Steps />
           </div>
         </section>
 
-        <section className="container home-about reveal">
-          <h2>О центре</h2>
-          <p>
-            ЧОУ ДПО УМЦ «Темпус» осуществляет образовательную деятельность
-            по программам дополнительного профессионального образования,
-            повышения квалификации и профессиональной переподготовки.
-          </p>
-        </section>
+        {programsLoading && (
+          <div className="container home-status">
+            <StatusMessage>Загрузка…</StatusMessage>
+          </div>
+        )}
 
-        <section className="container home-section">
-          <div className="section-heading">
-            <h2>Последние новости</h2>
-            <Link to="/news">Все новости →</Link>
+        {!programsLoading && programs.length === 0 && (
+          <section className="home-program">
+            <div className="container home-program-fallback">
+              <h2>Программы обучения</h2>
+              <Link to="/sveden/obrazovanie" className="link-arrow">
+                Сведения → Образование
+              </Link>
+            </div>
+          </section>
+        )}
+
+        {programs.map((program, index) => (
+          <section
+            key={program.anchor}
+            className={index % 2 === 1 ? 'home-program home-program--alt' : 'home-program'}
+          >
+            <div className="container home-program-inner">
+              <div>
+                <p className="home-program-kicker">Программа профессиональной переподготовки</p>
+                <h2>{program.title}</h2>
+                {program.summary && <p className="home-program-summary">{program.summary}</p>}
+                <Link to={`/sveden/obrazovanie#${program.anchor}`} className="link-arrow">
+                  Описание и рабочая программа
+                </Link>
+              </div>
+
+              {program.facts.length > 0 && (
+                <div className="home-facts">
+                  {program.facts.map((fact) => (
+                    <div key={fact.label}>
+                      <strong>{fact.value}</strong>
+                      {fact.label}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+        ))}
+
+        <nav className="home-tasks" aria-label="Частые задачи">
+          {TASKS.map((task) => (
+            <Link key={task.to} to={task.to}>
+              <span className="home-task-title">{task.title}</span>
+              <span className="home-task-text">{task.text}</span>
+            </Link>
+          ))}
+        </nav>
+
+        <section className="container home-news">
+          <div className="home-news-head">
+            <h2>Новости</h2>
+            <Link to="/news" className="link-arrow">
+              Все новости
+            </Link>
           </div>
 
           {newsLoading && <StatusMessage>Загрузка…</StatusMessage>}
@@ -117,69 +169,20 @@ export default function HomePage() {
             <StatusMessage>Новостей пока нет.</StatusMessage>
           )}
 
-          <div className="news-grid">
+          <div className="home-news-grid">
             {news.map((item) => (
-              <Link
-                key={item.id}
-                to={`/news/${item.slug}`}
-                className="news-card home-news-card reveal"
-              >
+              <Link key={item.id} to={`/news/${item.slug}`} className="home-news-item">
                 {item.image?.url ? (
-                  <img
-                    className="news-image"
-                    src={`${item.image.url}`}
-                    alt={item.title}
-                  />
+                  <img src={item.image.url} alt={item.title} />
                 ) : (
-                  <div className="news-image news-image--placeholder" aria-hidden="true">
+                  <div className="home-news-placeholder" aria-hidden="true">
                     <img src="/logo-tempus1.png" alt="" />
                   </div>
                 )}
-
-                {item.date && <time className="news-date" dateTime={item.date}>{formatDate(item.date)}</time>}
-
+                {item.date && <time dateTime={item.date}>{formatDate(item.date)}</time>}
                 <h3>{item.title}</h3>
-
-                {item.content && <p>{getPreview(item.content, item.title)}</p>}
-
-                <strong className="read-more">Читать далее →</strong>
               </Link>
             ))}
-          </div>
-        </section>
-
-        <section className="container quick-links reveal">
-          <h2>Популярные разделы</h2>
-
-          <div className="quick-links-grid">
-            <Link to="/sveden">Сведения об образовательной организации</Link>
-            <Link to="/sveden/dokumenty">Документы</Link>
-            <Link to="/schedule">Расписание</Link>
-            <Link to="/library">Учебная литература</Link>
-            <Link to="/gallery">Фотогалерея</Link>
-            <Link to="/contacts">Контакты</Link>
-          </div>
-        </section>
-        <section className="container search-preview reveal">
-          <div className="search-preview-card">
-            <h2>Поиск по сайту</h2>
-            <p>Быстро найдите нужный документ, новость или раздел сайта.</p>
-
-            <div className="search-preview-form">
-              <input
-                type="text"
-                placeholder="Введите запрос..."
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') handleSearch();
-                }}
-              />
-
-              <button type="button" onClick={handleSearch}>
-                Найти
-              </button>
-            </div>
           </div>
         </section>
       </main>

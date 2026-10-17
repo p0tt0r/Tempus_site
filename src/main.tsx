@@ -7,6 +7,7 @@ import './styles/tokens.css'
 import './styles/base.css'
 import './styles/header.css'
 import './styles/footer.css'
+import './styles/home.css'
 import './styles/low-vision.css'
 
 createRoot(document.getElementById('root')!).render(
