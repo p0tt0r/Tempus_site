@@ -1659,6 +1659,32 @@ h3 {
     margin-top: 0 !important;
   }
 }
+
+/* NARROW HEADER (320px) */
+
+@media (max-width: 360px) {
+  .header-inner {
+    padding: 10px 12px !important;
+  }
+
+  .logo {
+    gap: 8px !important;
+  }
+
+  .brand-logo,
+  .logo img {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .logo span {
+    font-size: 18px !important;
+  }
+
+  .burger {
+    margin-left: 8px !important;
+  }
+}
 /* FINAL POLISH: ANIMATIONS, BUTTONS, HEADINGS */
 
 /* плавное появление */
