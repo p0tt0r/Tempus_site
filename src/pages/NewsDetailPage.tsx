@@ -22,7 +22,7 @@ export default function NewsDetailPage() {
 
   useEffect(() => {
     fetch(
-      `http://185.239.50.50:1337/api/articles?filters[slug][$eq]=${slug}&populate=image`,
+      `/api/articles?filters[slug][$eq]=${slug}&populate=image`,
     )
       .then((res) => res.json())
       .then((data) => setNewsItem(data.data?.[0] || null))
@@ -43,7 +43,7 @@ export default function NewsDetailPage() {
             {newsItem.image?.url && (
               <img
                 className="news-detail-image"
-                src={`http://185.239.50.50:1337${newsItem.image.url}`}
+                src={`${newsItem.image.url}`}
                 alt={newsItem.title}
               />
             )}

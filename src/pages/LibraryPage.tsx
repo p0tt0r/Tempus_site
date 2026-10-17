@@ -17,7 +17,7 @@ export default function LibraryPage() {
   const [items, setItems] = useState<LibraryItem[]>([]);
 
   useEffect(() => {
-    fetch('http://185.239.50.50:1337/api/library-items?sort=title:asc&populate=file')
+    fetch('/api/library-items?sort=title:asc&populate=file')
       .then((res) => res.json())
       .then((data) => setItems(data.data || []))
       .catch((error) => console.error('Ошибка загрузки литературы:', error));
@@ -35,7 +35,7 @@ export default function LibraryPage() {
             <a
               key={item.id}
               className="document-item reveal"
-              href={item.file?.url ? `http://185.239.50.50:1337${item.file.url}` : '#'}
+              href={item.file?.url ? `${item.file.url}` : '#'}
               target="_blank"
               rel="noreferrer"
             >

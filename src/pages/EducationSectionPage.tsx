@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const API_URL = 'http://185.239.50.50:1337';
+const API_URL = '';
 
 type MediaFile = {
     url: string;

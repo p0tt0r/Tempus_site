@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 
 
 
-const API_URL = 'http://185.239.50.50:1337';
+const API_URL = '';
 
 type SearchItem = {
   id: number;
