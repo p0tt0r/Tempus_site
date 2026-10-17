@@ -44,7 +44,7 @@ export default function SchedulePage() {
     <>
       <Header />
 
-      <main className="container page">
+      <main id="main" className="container page">
         <h1>Расписание</h1>
 
         {loading && <StatusMessage>Загрузка…</StatusMessage>}

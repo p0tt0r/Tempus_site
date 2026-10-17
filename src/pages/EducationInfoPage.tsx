@@ -22,7 +22,7 @@ export default function EducationInfoPage() {
   return (
     <>
       <Header />
-      <main className="container page">
+      <main id="main" className="container page">
         <p>Загрузка раздела...</p>
       </main>
       <Footer />

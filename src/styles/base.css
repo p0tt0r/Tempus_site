@@ -1,0 +1,119 @@
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--ground);
+}
+
+@media (min-width: 981px) {
+  body {
+    font-size: 1.125rem;
+  }
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-size: 2.25rem;
+  line-height: 1.1;
+  margin: 20px 0;
+}
+
+h2 {
+  font-size: 1.625rem;
+  line-height: 1.15;
+  margin: 0 0 8px;
+}
+
+@media (min-width: 981px) {
+  h1 {
+    font-size: 4rem;
+    margin: 32px 0;
+  }
+  h2 {
+    font-size: 2.125rem;
+  }
+}
+
+.container {
+  width: min(1200px, 100% - 32px);
+  margin-inline: auto;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 24px;
+  border: 0;
+  border-radius: 0;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.link-arrow {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.link-arrow::after {
+  content: ' →';
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 1000;
+  padding: 12px 20px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* Лесенка (компонент Steps) */
+.steps {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+}
+
+.steps > span {
+  display: block;
+  height: 22px;
+}
+
+.steps > span:nth-child(1) { width: 28%; background: var(--step-1); }
+.steps > span:nth-child(2) { width: 46%; background: var(--step-2); }
+.steps > span:nth-child(3) { width: 64%; background: var(--step-3); }
+.steps > span:nth-child(4) { width: 82%; background: var(--step-4); }
+.steps > span:nth-child(5) { width: 100%; background: var(--step-5); }
+
+@media (max-width: 768px) {
+  .steps > span {
+    height: 14px;
+  }
+}

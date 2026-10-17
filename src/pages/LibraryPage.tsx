@@ -43,7 +43,7 @@ export default function LibraryPage() {
     <>
       <Header />
 
-      <main className="container page">
+      <main id="main" className="container page">
         <h1>Учебная литература по программам</h1>
 
         {loading && <StatusMessage>Загрузка…</StatusMessage>}

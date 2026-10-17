@@ -54,7 +54,7 @@ export default function ContactsPage() {
     <>
       <Header />
 
-      <main className="container page reveal">
+      <main id="main" className="container page reveal">
         <h1>Контакты</h1>
 
         {loading && <StatusMessage>Загрузка…</StatusMessage>}

@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'Golos Text';
+  src: url('/fonts/GolosText-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Golos Text';
+  src: url('/fonts/GolosText-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Golos Text';
+  src: url('/fonts/GolosText-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Golos Text';
+  src: url('/fonts/GolosText-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font: 'Golos Text', system-ui, sans-serif;
+
+  --ground: #ffffff;
+  --ink: #0b1f4d;
+  --accent: #0a52e0;
+  --tint: #eef3fb;
+  --muted: #4a5875;
+
+  --step-1: #2f6df0;
+  --step-2: #1d5fe8;
+  --step-3: #0a52e0;
+  --step-4: #123c9e;
+  --step-5: #0b1f4d;
+
+  --tile-1: #0b1f4d;
+  --tile-2: #13306e;
+  --tile-3: #1b3f8c;
+}

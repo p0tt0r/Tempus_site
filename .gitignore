@@ -37,3 +37,7 @@ cms/.tmp/
 cms/dist/
 .env
 cms/.env
+
+# служебное
+.superpowers/
+.taste-skill/

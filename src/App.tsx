@@ -16,6 +16,7 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
+      <a className="skip-link" href="#main">Перейти к содержимому</a>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />

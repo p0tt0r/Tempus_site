@@ -50,7 +50,7 @@ export default function NewsDetailPage() {
     <>
       <Header />
 
-      <main className="container page">
+      <main id="main" className="container page">
         {loading ? (
           <StatusMessage>Загрузка…</StatusMessage>
         ) : error ? (

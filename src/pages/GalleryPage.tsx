@@ -77,7 +77,7 @@ export default function GalleryPage() {
         <>
             <Header />
 
-            <main className="container page">
+            <main id="main" className="container page">
                 <h1>Фотогалерея</h1>
 
                 {loading && <StatusMessage>Загрузка…</StatusMessage>}

@@ -115,7 +115,7 @@ export default function EducationSectionPage() {
         <>
             <Header />
 
-            <main className="container page">
+            <main id="main" className="container page">
 
                 <button
                     className="sidebar-toggle"

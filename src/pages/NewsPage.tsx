@@ -44,7 +44,7 @@ export default function NewsPage() {
     <>
       <Header />
 
-      <main className="container page">
+      <main id="main" className="container page">
         <h1>Новости</h1>
 
         {loading && <StatusMessage>Загрузка…</StatusMessage>}

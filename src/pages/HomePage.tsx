@@ -58,7 +58,7 @@ export default function HomePage() {
     <>
       <Header />
 
-      <main>
+      <main id="main">
         <section className="hero">
           <div className="container hero-inner">
             <div>

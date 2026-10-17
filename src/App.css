@@ -1687,29 +1687,6 @@ h3 {
 }
 /* FINAL POLISH: ANIMATIONS, BUTTONS, HEADINGS */
 
-/* плавное появление */
-.hero,
-.home-about,
-.quick-links,
-.news-card,
-.card,
-.sveden-content,
-.education-content,
-.document-item,
-.sveden-document-card {
-  animation: fadeUp 0.65s ease both;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* заголовки */
 .page h1,
@@ -1903,36 +1880,6 @@ h3 {
   padding-top: 12px;
   color: var(--blue) !important;
   font-weight: 800 !important;
-}
-
-/* блоки выплывают при скролле */
-.reveal {
-  opacity: 0;
-  transform: translateY(34px);
-  animation: revealUp 0.75s ease forwards;
-  animation-timeline: view();
-  animation-range: entry 0% cover 30%;
-}
-
-@keyframes revealUp {
-  from {
-    opacity: 0;
-    transform: translateY(34px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* на старых браузерах просто мягкое появление */
-@supports not (animation-timeline: view()) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    animation: fadeUp 0.65s ease both;
-  }
 }
 
 /* чтобы картинки внутри карточек красиво обрезались */
