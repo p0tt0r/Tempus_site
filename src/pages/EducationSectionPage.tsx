@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import StatusMessage from '../components/StatusMessage';
 
 const API_URL = '';
 
@@ -55,17 +56,18 @@ export default function EducationSectionPage() {
     const [sections, setSections] = useState<Section[]>([]);
     const [documents, setDocuments] = useState<OldDocumentItem[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     useEffect(() => {
         setLoading(true);
+        setError(false);
 
         fetch(
             `${API_URL}/api/education-sections?sort=order:asc&pagination[pageSize]=50&populate=*`,
         )
             .then((res) => res.json())
             .then((data) => {
-                console.log('SECTIONS MENU:', data);
                 setSections(data.data || []);
             })
             .catch((error) => console.error('Ошибка загрузки меню:', error));
@@ -73,9 +75,19 @@ export default function EducationSectionPage() {
         fetch(
             `${API_URL}/api/education-sections?filters[slug][$eq]=${slug}&populate[documents][populate]=file`,
         )
-            .then((res) => res.json())
-            .then((data) => setSection(data.data?.[0] || null))
-            .catch((error) => console.error('Ошибка загрузки раздела:', error))
+            .then((res) => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json();
+            })
+            .then((data) => {
+                if (data.error) throw new Error(data.error.message || 'API error');
+                setSection(data.data?.[0] || null);
+            })
+            .catch((error) => {
+                console.error('Ошибка загрузки раздела:', error);
+                setSection(null);
+                setError(true);
+            })
             .finally(() => setLoading(false));
 
         if (slug === 'dokumenty') {
@@ -123,7 +135,7 @@ export default function EducationSectionPage() {
                     </aside>
 
                     <section className="education-content">
-                        {loading && <p>Загрузка раздела...</p>}
+                        {loading && <StatusMessage>Загрузка…</StatusMessage>}
 
                         {!loading && section ? (
                             <>
@@ -194,17 +206,16 @@ export default function EducationSectionPage() {
                                         })}
                                     </div>
                                 )}
-
-                                {slug === 'dokumenty' && documents.length === 0 && (
-                                    <p></p>
-                                )}
-
-                                {slug !== 'dokumenty' && sectionDocuments.length === 0 && (
-                                    <p></p>
-                                )}
                             </>
                         ) : (
-                            !loading && <p>Раздел не найден</p>
+                            !loading &&
+                            (error ? (
+                                <StatusMessage variant="error">
+                                    Не удалось загрузить данные. Попробуйте обновить страницу позже.
+                                </StatusMessage>
+                            ) : (
+                                <StatusMessage>Раздел не найден</StatusMessage>
+                            ))
                         )}
                     </section>
                 </div>

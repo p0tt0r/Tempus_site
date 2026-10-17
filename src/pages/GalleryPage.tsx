@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import StatusMessage from '../components/StatusMessage';
 
 type GalleryImage = {
     id: number;
@@ -17,14 +18,26 @@ type GalleryItem = {
 
 export default function GalleryPage() {
     const [galleries, setGalleries] = useState<GalleryItem[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [activeGallery, setActiveGallery] = useState<GalleryItem | null>(null);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
 
     useEffect(() => {
         fetch('/api/galleries?sort=date:desc&populate=images')
-            .then((res) => res.json())
-            .then((data) => setGalleries(data.data || []))
-            .catch((error) => console.error('Ошибка загрузки галереи:', error));
+            .then((res) => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json();
+            })
+            .then((data) => {
+                if (data.error) throw new Error(data.error.message || 'API error');
+                setGalleries(data.data || []);
+            })
+            .catch((error) => {
+                console.error('Ошибка загрузки галереи:', error);
+                setError(true);
+            })
+            .finally(() => setLoading(false));
     }, []);
 
     const activeImage = activeGallery?.images?.[activeImageIndex];
@@ -65,6 +78,16 @@ export default function GalleryPage() {
 
             <main className="container page">
                 <h1>Фотогалерея</h1>
+
+                {loading && <StatusMessage>Загрузка…</StatusMessage>}
+                {!loading && error && (
+                    <StatusMessage variant="error">
+                        Не удалось загрузить данные. Попробуйте обновить страницу позже.
+                    </StatusMessage>
+                )}
+                {!loading && !error && galleries.length === 0 && (
+                    <StatusMessage>Фотоальбомы пока не добавлены.</StatusMessage>
+                )}
 
                 <div className="album-grid reveal">
                     {galleries.map((gallery) => {

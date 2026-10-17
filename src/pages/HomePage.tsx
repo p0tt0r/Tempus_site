@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import StatusMessage from '../components/StatusMessage';
 
 
 
@@ -32,6 +33,8 @@ function getPreview(text?: string, length = 160) {
 
 export default function HomePage() {
   const [news, setNews] = useState<NewsItem[]>([]);
+  const [newsLoading, setNewsLoading] = useState(true);
+  const [newsError, setNewsError] = useState(false);
   const [searchText, setSearchText] = useState('');
   const navigate = useNavigate();
 
@@ -47,9 +50,19 @@ export default function HomePage() {
 
   useEffect(() => {
     fetch('/api/articles?sort=date:desc&pagination[pageSize]=3&populate=image')
-      .then((res) => res.json())
-      .then((data) => setNews(data.data || []))
-      .catch((error) => console.error('Ошибка загрузки новостей:', error));
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (data.error) throw new Error(data.error.message || 'API error');
+        setNews(data.data || []);
+      })
+      .catch((error) => {
+        console.error('Ошибка загрузки новостей:', error);
+        setNewsError(true);
+      })
+      .finally(() => setNewsLoading(false));
   }, []);
 
   return (
@@ -104,6 +117,16 @@ export default function HomePage() {
             <h2>Последние новости</h2>
             <Link to="/news">Все новости →</Link>
           </div>
+
+          {newsLoading && <StatusMessage>Загрузка…</StatusMessage>}
+          {!newsLoading && newsError && (
+            <StatusMessage variant="error">
+              Не удалось загрузить данные. Попробуйте обновить страницу позже.
+            </StatusMessage>
+          )}
+          {!newsLoading && !newsError && news.length === 0 && (
+            <StatusMessage>Новостей пока нет.</StatusMessage>
+          )}
 
           <div className="news-grid">
             {news.map((item) => (

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import StatusMessage from '../components/StatusMessage';
 import { useSearchParams } from "react-router-dom";
 
 
@@ -29,18 +30,31 @@ function cleanText(text?: string) {
     .trim();
 }
 
+function fetchJson(url: string) {
+  return fetch(url)
+    .then((res) => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    })
+    .then((data) => {
+      if (data.error) throw new Error(data.error.message || 'API error');
+      return data;
+    });
+}
+
 export default function SearchPage() {
   const [params] = useSearchParams();
 
   const [query, setQuery] = useState(params.get("q") ?? "");
   const [items, setItems] = useState<SearchItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     Promise.all([
-      fetch(`${API_URL}/api/articles?pagination[pageSize]=100`).then((res) => res.json()),
-      fetch(`${API_URL}/api/education-sections?pagination[pageSize]=100`).then((res) => res.json()),
-      fetch(`${API_URL}/api/documents?pagination[pageSize]=100`).then((res) => res.json()),
+      fetchJson(`${API_URL}/api/articles?pagination[pageSize]=100`),
+      fetchJson(`${API_URL}/api/education-sections?pagination[pageSize]=100`),
+      fetchJson(`${API_URL}/api/documents?pagination[pageSize]=100`),
     ])
       .then(([articles, sections, documents]) => {
         const articleItems: SearchItem[] = (articles.data || []).map((item: any) => ({
@@ -71,7 +85,10 @@ export default function SearchPage() {
 
         setItems([...articleItems, ...sectionItems, ...documentItems]);
       })
-      .catch((error) => console.error('Ошибка поиска:', error))
+      .catch((error) => {
+        console.error('Ошибка поиска:', error);
+        setError(true);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -106,7 +123,11 @@ export default function SearchPage() {
           />
 
           {loading ? (
-            <p>Загрузка...</p>
+            <StatusMessage>Загрузка…</StatusMessage>
+          ) : error ? (
+            <StatusMessage variant="error">
+              Не удалось загрузить данные. Попробуйте обновить страницу позже.
+            </StatusMessage>
           ) : (
             <div className="search-results">
               {results.length > 0 ? (
@@ -118,7 +139,7 @@ export default function SearchPage() {
                   </Link>
                 ))
               ) : (
-                <p>Ничего не найдено.</p>
+                <StatusMessage>Ничего не найдено.</StatusMessage>
               )}
             </div>
           )}

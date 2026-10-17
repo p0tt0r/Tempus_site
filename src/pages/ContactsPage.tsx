@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import StatusMessage from '../components/StatusMessage';
 
 type Contact = {
   id: number;
@@ -14,12 +15,24 @@ type Contact = {
 
 export default function ContactsPage() {
   const [contact, setContact] = useState<Contact | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetch('/api/contacts')
-      .then((res) => res.json())
-      .then((data) => setContact(data.data?.[0] || null))
-      .catch((error) => console.error('Ошибка загрузки контактов:', error));
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (data.error) throw new Error(data.error.message || 'API error');
+        setContact(data.data?.[0] || null);
+      })
+      .catch((error) => {
+        console.error('Ошибка загрузки контактов:', error);
+        setError(true);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -28,6 +41,16 @@ export default function ContactsPage() {
 
       <main className="container page reveal">
         <h1>Контакты</h1>
+
+        {loading && <StatusMessage>Загрузка…</StatusMessage>}
+        {!loading && error && (
+          <StatusMessage variant="error">
+            Не удалось загрузить данные. Попробуйте обновить страницу позже.
+          </StatusMessage>
+        )}
+        {!loading && !error && !contact && (
+          <StatusMessage>Контактная информация пока не добавлена.</StatusMessage>
+        )}
 
         {contact && (
           <div className="contact-card reveal">
