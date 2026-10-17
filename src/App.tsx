@@ -12,7 +12,6 @@ import NewsDetailPage from './pages/NewsDetailPage';
 import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
 import LowVisionPanel from './lowVision/LowVisionPanel';
-import './App.css';
 
 function App() {
   return (

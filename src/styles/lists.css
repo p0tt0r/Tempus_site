@@ -32,9 +32,18 @@
 .file-row span,
 .file-row-desc {
   margin: 4px 0 0;
+  max-width: 70ch;
   color: var(--muted);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .file-row p,
+  .file-row span,
+  .file-row-desc {
+    font-size: 0.9375rem;
+  }
 }
 
 .file-row time {

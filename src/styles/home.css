@@ -104,7 +104,7 @@
 
 .home-facts {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px 28px;
   align-content: start;
   font-size: 0.9375rem;
@@ -214,7 +214,7 @@
   }
 
   .home-program-inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
 
@@ -246,4 +246,16 @@ html[data-lv='on'] .home-tasks a {
 
 html[data-lv='on'] .home-program {
   border-top: 2px solid var(--lv-fg);
+}
+
+/* узкие телефоны: ячейки фактов не шире колонки */
+@media (max-width: 360px) {
+  .home-facts {
+    gap: 18px 16px;
+    overflow-wrap: anywhere;
+  }
+
+  .home-facts strong {
+    font-size: 1.125rem;
+  }
 }

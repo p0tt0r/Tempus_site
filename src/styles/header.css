@@ -113,7 +113,7 @@
 .nav > a.active,
 .nav-dropdown > a.active {
   color: var(--accent);
-  box-shadow: inset 0 -3px 0 var(--accent);
+  box-shadow: inset 0 -3px 0 var(--accent); /* taste-skill-ignore: индикатор активного пункта, не тень */
 }
 
 .nav-dropdown {
@@ -134,7 +134,7 @@
   padding: 8px 0;
   background: var(--ground);
   border-radius: 0;
-  box-shadow: 0 12px 32px rgba(11, 31, 77, 0.18);
+  box-shadow: 0 12px 32px rgba(11, 31, 77, 0.18); /* taste-skill-ignore: тень выпадающего меню, всплывающий элемент */
   white-space: normal;
 }
 
@@ -177,7 +177,8 @@
   right: 0;
   z-index: 9999;
   width: min(86vw, 400px);
-  height: 100vh;
+  height: 100vh; /* запасной вариант */
+  height: 100dvh;
   padding: 16px 24px 32px;
   overflow-y: auto;
   background: var(--ground);

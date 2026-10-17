@@ -88,51 +88,30 @@ html[data-lv='on'] {
   --tile-1: var(--lv-bg);
   --tile-2: var(--lv-bg);
   --tile-3: var(--lv-bg);
-  /* токены старого App.css */
-  --blue: var(--lv-fg);
-  --blue-dark: var(--lv-fg);
-  --blue-soft: var(--lv-bg);
-  --text: var(--lv-fg);
-  --border: var(--lv-fg);
-  --border-light: var(--lv-fg);
-  --bg: var(--lv-bg);
-  --white: var(--lv-bg);
-  --text-strong: var(--lv-fg);
-  --text-nav: var(--lv-fg);
-  --text-secondary: var(--lv-fg);
-  --heading: var(--lv-fg);
-  --navy: var(--lv-fg);
-  --blue-link: var(--lv-fg);
-  --blue-accent: var(--lv-fg);
-  --blue-tint: var(--lv-bg);
-  --slate: var(--lv-fg);
-  --shadow: none;
   font-size: calc(100% * var(--lv-scale));
   scroll-behavior: auto;
 }
 
-/* Старые правила App.css задают цвета напрямую (в т.ч. с !important) —
-   в этом режиме цвет определяет только схема. */
+/* Цвет, рамки и тени задаёт только схема: перекрывает и прямые цвета в стилях страниц. */
 html[data-lv='on'][data-lv-size][data-lv-scheme] *,
 html[data-lv='on'][data-lv-size][data-lv-scheme] *::before,
 html[data-lv='on'][data-lv-size][data-lv-scheme] *::after {
-  background-color: var(--lv-bg) !important;
-  background-image: none !important;
-  color: var(--lv-fg) !important;
-  border-color: var(--lv-fg) !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  opacity: 1 !important;
-  animation: none !important;
-  transition: none !important;
+  background-color: var(--lv-bg);
+  background-image: none;
+  color: var(--lv-fg);
+  border-color: var(--lv-fg);
+  box-shadow: none; /* taste-skill-ignore: none, тени отключаются */
+  text-shadow: none; /* taste-skill-ignore: none, тени отключаются */
+  opacity: 1;
+  animation: none;
+  transition: none;
 }
 
 html[data-lv='on'] body {
   line-height: 1.7;
 }
 
-/* Размеры в px из старых правил не растут вместе с html — выравниваем читаемые тексты по шкале rem
-   (!important: старые правила App.css сами с !important, уйдут вместе с ними). */
+/* Размеры в px не растут вместе с html — выравниваем читаемые тексты по шкале rem. */
 html[data-lv='on'][data-lv-size][data-lv-scheme] p,
 html[data-lv='on'][data-lv-size][data-lv-scheme] li,
 html[data-lv='on'][data-lv-size][data-lv-scheme] td,
@@ -154,18 +133,21 @@ html[data-lv='on'][data-lv-size][data-lv-scheme] main a,
 html[data-lv='on'][data-lv-size][data-lv-scheme] main span,
 html[data-lv='on'][data-lv-size][data-lv-scheme] aside a,
 html[data-lv='on'][data-lv-size][data-lv-scheme] .nav a,
+html[data-lv='on'][data-lv-size][data-lv-scheme] .header-search,
+html[data-lv='on'][data-lv-size][data-lv-scheme] .home-facts,
 html[data-lv='on'][data-lv-size][data-lv-scheme] .dropdown-menu a,
-html[data-lv='on'][data-lv-size][data-lv-scheme] .footer a {
-  font-size: 1.125rem !important;
+html[data-lv='on'][data-lv-size][data-lv-scheme] .footer a,
+html[data-lv='on'][data-lv-size][data-lv-scheme] .footer span {
+  font-size: 1.125rem;
   line-height: 1.7;
 }
 
 html[data-lv='on'][data-lv-size][data-lv-scheme] h2 {
-  font-size: 1.75rem !important;
+  font-size: 1.75rem;
 }
 
 html[data-lv='on'][data-lv-size][data-lv-scheme] h3 {
-  font-size: 1.375rem !important;
+  font-size: 1.375rem;
 }
 
 html[data-lv='on'] a {
@@ -188,8 +170,8 @@ html[data-lv='on'] textarea {
 
 html[data-lv='on'][data-lv-size][data-lv-scheme] .btn,
 html[data-lv='on'][data-lv-size][data-lv-scheme] .lv-option[aria-pressed='true'] {
-  background-color: var(--lv-fg) !important;
-  color: var(--lv-bg) !important;
+  background-color: var(--lv-fg);
+  color: var(--lv-bg);
 }
 
 html[data-lv='on'] :focus-visible {
@@ -199,13 +181,22 @@ html[data-lv='on'] :focus-visible {
 
 /* ступени: остаются, но одним цветом с зазором */
 html[data-lv='on'][data-lv-size][data-lv-scheme] .steps > span {
-  background-color: var(--lv-fg) !important;
+  background-color: var(--lv-fg);
   border-bottom: 2px solid var(--lv-bg);
 }
 
 /* шапка: при крупном тексте меню переносится, а не уезжает за край */
 html[data-lv='on'] .header-inner {
   flex-wrap: wrap;
+}
+
+html[data-lv='on'] .logo {
+  white-space: normal;
+  max-width: 100%;
+}
+
+html[data-lv='on'] .brand-logo {
+  flex-shrink: 0;
 }
 
 html[data-lv='on'] .nav {
@@ -222,7 +213,7 @@ html[data-lv='on'] .dropdown-menu {
 
 html[data-lv='on'][data-lv-size][data-lv-scheme] .nav > a.active,
 html[data-lv='on'][data-lv-size][data-lv-scheme] .nav-dropdown > a.active {
-  box-shadow: none !important;
+  box-shadow: none; /* taste-skill-ignore: none, тени отключаются */
   text-decoration-thickness: 4px;
 }
 
@@ -233,7 +224,7 @@ html[data-lv='on'] .mobile-menu {
 /* ---- изображения выключены ---- */
 /* вместо картинки — её alt-текст (вставляет syncImageAlts из lowVision.ts) */
 html[data-lv='on'][data-lv-images='off'] img {
-  display: none !important;
+  display: none;
 }
 
 .lv-alt {
@@ -257,6 +248,11 @@ html[data-lv='on'] span,
 html[data-lv='on'] h1,
 html[data-lv='on'] h2,
 html[data-lv='on'] h3 {
+  overflow-wrap: anywhere;
+}
+
+html[data-lv='on'] .home-facts {
+  grid-template-columns: minmax(0, 1fr);
   overflow-wrap: anywhere;
 }
 

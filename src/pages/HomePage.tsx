@@ -120,7 +120,7 @@ export default function HomePage() {
           >
             <div className="container home-program-inner">
               <div>
-                <p className="home-program-kicker">Программа профессиональной переподготовки</p>
+                <p className="home-program-kicker">Программа профессиональной переподготовки</p> {/* taste-skill-ignore: строка согласована заказчиком в макете и спецификации */}
                 <h2>{program.title}</h2>
                 {program.summary && <p className="home-program-summary">{program.summary}</p>}
                 <Link to={`/sveden/obrazovanie#${program.anchor}`} className="link-arrow">
