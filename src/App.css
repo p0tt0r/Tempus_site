@@ -561,7 +561,7 @@ h3 {
 }
 
 .document-item span {
-  color: #8a96a8;
+  color: var(--muted);
   font-size: 14px;
 }
 
