@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import StatusMessage from '../components/StatusMessage';
+import { formatDate } from '../utils/formatDate';
+import { getPreview } from '../utils/newsPreview';
 
 type NewsItem = {
   id: number;
@@ -14,19 +16,6 @@ type NewsItem = {
     url: string;
   };
 };
-function getPreview(text?: string, length = 160) {
-  if (!text) return '';
-
-  return text
-    .replace(/#{1,6}\s/g, '')
-    .replace(/\*\*/g, '')
-    .replace(/[*_>`]/g, '')
-    .replace(/-\s/g, '')
-    .replace(/\n/g, ' ')
-    .trim()
-    .slice(0, length);
-}
-
 export default function NewsPage() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -84,16 +73,16 @@ export default function NewsPage() {
               )}
 
               {item.date && (
-                <span className="news-date">
-                  {item.date}
-                </span>
+                <time className="news-date" dateTime={item.date}>
+                  {formatDate(item.date)}
+                </time>
               )}
 
               <h3>{item.title}</h3>
 
               {item.content && (
                 <p>
-                  {getPreview(item.content.slice(0, 150))}...
+                  {getPreview(item.content, item.title)}
                 </p>
               )}
             </Link>

@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import StatusMessage from '../components/StatusMessage';
+import { formatDate } from '../utils/formatDate';
+import { getPreview } from '../utils/newsPreview';
 
 
 
@@ -17,19 +19,6 @@ type NewsItem = {
     url: string;
   };
 };
-
-function getPreview(text?: string, length = 160) {
-  if (!text) return '';
-
-  return text
-    .replace(/#{1,6}\s/g, '')
-    .replace(/\*\*/g, '')
-    .replace(/[*_>`]/g, '')
-    .replace(/-\s/g, '')
-    .replace(/\n/g, ' ')
-    .trim()
-    .slice(0, length);
-}
 
 export default function HomePage() {
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -143,11 +132,11 @@ export default function HomePage() {
                   />
                 )}
 
-                {item.date && <span className="news-date">{item.date}</span>}
+                {item.date && <time className="news-date" dateTime={item.date}>{formatDate(item.date)}</time>}
 
                 <h3>{item.title}</h3>
 
-                {item.content && <p>{getPreview(item.content)}...</p>}
+                {item.content && <p>{getPreview(item.content, item.title)}</p>}
 
                 <strong className="read-more">Читать далее →</strong>
               </Link>

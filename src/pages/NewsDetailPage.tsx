@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import StatusMessage from '../components/StatusMessage';
+import { formatDate } from '../utils/formatDate';
 
 type NewsItem = {
   id: number;
@@ -75,7 +76,7 @@ export default function NewsDetailPage() {
               />
             )}
 
-            {newsItem.date && <span className="news-date">{newsItem.date}</span>}
+            {newsItem.date && <time className="news-date" dateTime={newsItem.date}>{formatDate(newsItem.date)}</time>}
 
             <h1>{newsItem.title}</h1>
 

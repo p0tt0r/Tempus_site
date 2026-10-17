@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import StatusMessage from '../components/StatusMessage';
+import { formatDate } from '../utils/formatDate';
 import { formatFileInfo } from '../utils/fileInfo';
 
 type ScheduleItem = {
@@ -64,7 +65,7 @@ export default function SchedulePage() {
                 <div>
                   <h3>{item.title}</h3>
                   {item.description && <p>{item.description}</p>}
-                  {item.date && <span>{item.date}</span>}
+                  {item.date && <time dateTime={item.date}>{formatDate(item.date)}</time>}
                 </div>
 
                 {item.file?.url && (

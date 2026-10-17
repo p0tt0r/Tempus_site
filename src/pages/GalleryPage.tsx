@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import StatusMessage from '../components/StatusMessage';
+import { formatDate } from '../utils/formatDate';
 
 type GalleryImage = {
     id: number;
@@ -111,7 +112,7 @@ export default function GalleryPage() {
 
                                     <p>
                                         {gallery.images?.length || 0} фото
-                                        {gallery.date ? ` · ${gallery.date}` : ''}
+                                        {gallery.date ? <> · <time dateTime={gallery.date}>{formatDate(gallery.date)}</time></> : ''}
                                     </p>
                                 </div>
                             </button>
