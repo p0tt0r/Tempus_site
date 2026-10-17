@@ -1,0 +1,265 @@
+/* Версия для слабовидящих. Всё — только под html[data-lv="on"], обычная версия не затрагивается. */
+
+/* ---- панель настроек (видна только в режиме) ---- */
+.lv-panel {
+  background: var(--tint);
+  color: var(--ink);
+}
+
+.lv-panel-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 32px;
+  padding: 12px 0;
+}
+
+.lv-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.lv-group-label {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.lv-option,
+.lv-reset {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 8px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lv-option[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--ground);
+}
+
+.lv-reset {
+  margin-left: auto;
+}
+
+/* ---- схемы: переопределяем токены ---- */
+html[data-lv='on'] {
+  --lv-bg: #fff;
+  --lv-fg: #000;
+  --lv-scale: 1;
+}
+
+html[data-lv='on'][data-lv-scheme='wb'] {
+  --lv-bg: #000;
+  --lv-fg: #fff;
+}
+
+html[data-lv='on'][data-lv-scheme='blue'] {
+  --lv-bg: #9dd1ff;
+  --lv-fg: #063462;
+}
+
+html[data-lv='on'][data-lv-size='large'] {
+  --lv-scale: 1.5;
+}
+
+html[data-lv='on'][data-lv-size='xlarge'] {
+  --lv-scale: 2;
+}
+
+html[data-lv='on'] {
+  --ground: var(--lv-bg);
+  --ink: var(--lv-fg);
+  --accent: var(--lv-fg);
+  --tint: var(--lv-bg);
+  --muted: var(--lv-fg);
+  --step-1: var(--lv-fg);
+  --step-2: var(--lv-fg);
+  --step-3: var(--lv-fg);
+  --step-4: var(--lv-fg);
+  --step-5: var(--lv-fg);
+  --tile-1: var(--lv-bg);
+  --tile-2: var(--lv-bg);
+  --tile-3: var(--lv-bg);
+  /* токены старого App.css */
+  --blue: var(--lv-fg);
+  --blue-dark: var(--lv-fg);
+  --blue-soft: var(--lv-bg);
+  --text: var(--lv-fg);
+  --border: var(--lv-fg);
+  --border-light: var(--lv-fg);
+  --bg: var(--lv-bg);
+  --white: var(--lv-bg);
+  --text-strong: var(--lv-fg);
+  --text-nav: var(--lv-fg);
+  --text-secondary: var(--lv-fg);
+  --heading: var(--lv-fg);
+  --navy: var(--lv-fg);
+  --blue-link: var(--lv-fg);
+  --blue-accent: var(--lv-fg);
+  --blue-tint: var(--lv-bg);
+  --slate: var(--lv-fg);
+  --shadow: none;
+  font-size: calc(100% * var(--lv-scale));
+  scroll-behavior: auto;
+}
+
+/* Старые правила App.css задают цвета напрямую (в т.ч. с !important) —
+   в этом режиме цвет определяет только схема. */
+html[data-lv='on'][data-lv-size][data-lv-scheme] *,
+html[data-lv='on'][data-lv-size][data-lv-scheme] *::before,
+html[data-lv='on'][data-lv-size][data-lv-scheme] *::after {
+  background-color: var(--lv-bg) !important;
+  background-image: none !important;
+  color: var(--lv-fg) !important;
+  border-color: var(--lv-fg) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+html[data-lv='on'] body {
+  line-height: 1.7;
+}
+
+/* Размеры в px из старых правил не растут вместе с html — выравниваем читаемые тексты по шкале rem
+   (!important: старые правила App.css сами с !important, уйдут вместе с ними). */
+html[data-lv='on'][data-lv-size][data-lv-scheme] p,
+html[data-lv='on'][data-lv-size][data-lv-scheme] li,
+html[data-lv='on'][data-lv-size][data-lv-scheme] td,
+html[data-lv='on'][data-lv-size][data-lv-scheme] th,
+html[data-lv='on'][data-lv-size][data-lv-scheme] dd,
+html[data-lv='on'][data-lv-size][data-lv-scheme] dt,
+html[data-lv='on'][data-lv-size][data-lv-scheme] label,
+html[data-lv='on'][data-lv-size][data-lv-scheme] time,
+html[data-lv='on'][data-lv-size][data-lv-scheme] small,
+html[data-lv='on'][data-lv-size][data-lv-scheme] figcaption,
+html[data-lv='on'][data-lv-size][data-lv-scheme] caption,
+html[data-lv='on'][data-lv-size][data-lv-scheme] summary,
+html[data-lv='on'][data-lv-size][data-lv-scheme] input,
+html[data-lv='on'][data-lv-size][data-lv-scheme] select,
+html[data-lv='on'][data-lv-size][data-lv-scheme] textarea,
+html[data-lv='on'][data-lv-size][data-lv-scheme] button,
+html[data-lv='on'][data-lv-size][data-lv-scheme] .btn,
+html[data-lv='on'][data-lv-size][data-lv-scheme] main a,
+html[data-lv='on'][data-lv-size][data-lv-scheme] main span,
+html[data-lv='on'][data-lv-size][data-lv-scheme] aside a,
+html[data-lv='on'][data-lv-size][data-lv-scheme] .nav a,
+html[data-lv='on'][data-lv-size][data-lv-scheme] .dropdown-menu a,
+html[data-lv='on'][data-lv-size][data-lv-scheme] .footer a {
+  font-size: 1.125rem !important;
+  line-height: 1.7;
+}
+
+html[data-lv='on'][data-lv-size][data-lv-scheme] h2 {
+  font-size: 1.75rem !important;
+}
+
+html[data-lv='on'][data-lv-size][data-lv-scheme] h3 {
+  font-size: 1.375rem !important;
+}
+
+html[data-lv='on'] a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+html[data-lv='on'] .logo {
+  text-decoration: none;
+}
+
+/* кнопки и поля различаются рамкой, а не заливкой */
+html[data-lv='on'] .btn,
+html[data-lv='on'] button,
+html[data-lv='on'] input,
+html[data-lv='on'] select,
+html[data-lv='on'] textarea {
+  border: 2px solid var(--lv-fg);
+}
+
+html[data-lv='on'][data-lv-size][data-lv-scheme] .btn,
+html[data-lv='on'][data-lv-size][data-lv-scheme] .lv-option[aria-pressed='true'] {
+  background-color: var(--lv-fg) !important;
+  color: var(--lv-bg) !important;
+}
+
+html[data-lv='on'] :focus-visible {
+  outline: 4px solid var(--lv-fg);
+  outline-offset: 2px;
+}
+
+/* ступени: остаются, но одним цветом с зазором */
+html[data-lv='on'][data-lv-size][data-lv-scheme] .steps > span {
+  background-color: var(--lv-fg) !important;
+  border-bottom: 2px solid var(--lv-bg);
+}
+
+/* шапка: при крупном тексте меню переносится, а не уезжает за край */
+html[data-lv='on'] .header-inner {
+  flex-wrap: wrap;
+}
+
+html[data-lv='on'] .nav {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  white-space: normal;
+  gap: 0 24px;
+}
+
+html[data-lv='on'] .dropdown-menu {
+  width: 24rem;
+  border: 2px solid var(--lv-fg);
+}
+
+html[data-lv='on'][data-lv-size][data-lv-scheme] .nav > a.active,
+html[data-lv='on'][data-lv-size][data-lv-scheme] .nav-dropdown > a.active {
+  box-shadow: none !important;
+  text-decoration-thickness: 4px;
+}
+
+html[data-lv='on'] .mobile-menu {
+  border-left: 2px solid var(--lv-fg);
+}
+
+/* ---- изображения выключены ---- */
+/* вместо картинки — её alt-текст (вставляет syncImageAlts из lowVision.ts) */
+html[data-lv='on'][data-lv-images='off'] img {
+  display: none !important;
+}
+
+.lv-alt {
+  display: block;
+  margin: 0 0 8px;
+  font-style: italic;
+}
+
+html[data-lv='on'][data-lv-images='off'] .steps,
+html[data-lv='on'][data-lv-images='off'] picture,
+html[data-lv='on'][data-lv-images='off'] video,
+html[data-lv='on'][data-lv-images='off'] iframe {
+  display: none;
+}
+
+/* крупный текст на узком экране: слова переносятся, а не уезжают за край */
+html[data-lv='on'] a,
+html[data-lv='on'] p,
+html[data-lv='on'] li,
+html[data-lv='on'] span,
+html[data-lv='on'] h1,
+html[data-lv='on'] h2,
+html[data-lv='on'] h3 {
+  overflow-wrap: anywhere;
+}
+
+html[data-lv='on'] .footer-columns {
+  grid-template-columns: minmax(0, 1fr);
+}

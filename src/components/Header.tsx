@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { openLowVision } from '../lowVision/lowVision';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -50,7 +51,7 @@ export default function Header() {
             </svg>
             Поиск по сайту
           </Link>
-          <button type="button" className="lv-toggle">Версия для слабовидящих</button>
+          <button type="button" className="lv-toggle" onClick={openLowVision}>Версия для слабовидящих</button>
         </div>
 
         <button
@@ -162,7 +163,14 @@ export default function Header() {
         <NavLink to="/gallery" onClick={closeMenu}>Фотогалерея</NavLink>
         <NavLink to="/contacts" onClick={closeMenu}>Контакты</NavLink>
         <NavLink to="/search" onClick={closeMenu}>Поиск по сайту</NavLink>
-        <button type="button" className="lv-toggle">Версия для слабовидящих</button>
+        <button
+          type="button"
+          className="lv-toggle"
+          onClick={() => {
+            closeMenu();
+            openLowVision();
+          }}
+        >Версия для слабовидящих</button>
       </aside>
     </header>
   );

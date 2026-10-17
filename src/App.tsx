@@ -11,12 +11,14 @@ import GalleryPage from './pages/GalleryPage';
 import NewsDetailPage from './pages/NewsDetailPage';
 import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
+import LowVisionPanel from './lowVision/LowVisionPanel';
 import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
       <a className="skip-link" href="#main">Перейти к содержимому</a>
+      <LowVisionPanel />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
