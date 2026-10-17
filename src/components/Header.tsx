@@ -81,15 +81,15 @@ export default function Header() {
                 <Link to="/sveden/dokumenty">Документы</Link>
                 <Link to="/sveden/obrazovanie">Образование</Link>
                 <Link to="/sveden/rukovodstvo">Руководство</Link>
-                <Link to="/sveden/pedagogicheskiy-sostav">Педагогический состав</Link>
-                <Link to="/sveden/materialno-tehnicheskoe-obespechenie">Материально-техническое обеспечение</Link>
+                <Link to="/sveden/pedagogicheskij-sostav">Педагогический состав</Link>
+                <Link to="/sveden/materialno-tehnicheskoe-obespechenie-i-dostupnaya-sreda">Материально-техническое обеспечение</Link>
                 <Link to="/sveden/platnye-obrazovatelnye-uslugi">Платные образовательные услуги</Link>
-                <Link to="/sveden/finansovo-hozyaystvennaya-deyatelnost">Финансово-хозяйственная деятельность</Link>
-                <Link to="/sveden/vakantnye-mesta-dlya-priema">Вакантные места для приема</Link>
-                <Link to="/sveden/stipendii-i-mery-podderzhki">Стипендии и меры поддержки</Link>
-                <Link to="/sveden/obrazovatelnye-standarty-i-trebovaniya">Образовательные стандарты и требования</Link>
-                <Link to="/sveden/mezhdunarodnoe-sotrudnichestvo">Международное сотрудничество</Link>
-                <Link to="/sveden/organizatsiya-pitaniya">Организация питания</Link>
+                <Link to="/sveden/finansovo-hozyajstvennaya-deyatelnost">Финансово-хозяйственная деятельность</Link>
+                <Link to="/sveden/vakantnye-mesta-dlya-priema-perevoda">Вакантные места для приема</Link>
+                <Link to="/sveden/stipendiya-i-mery-podderzhki-obuchayushhihsya">Стипендии и меры поддержки</Link>
+                <Link to="/sveden/obrazovatelnyj-standarty-i-trebovaniya">Образовательные стандарты и требования</Link>
+                <Link to="/sveden/education-section">Международное сотрудничество</Link>
+                <Link to="/sveden/organizacziya-pitaniya">Организация питания</Link>
               </div>
             </div>
 
@@ -140,15 +140,15 @@ export default function Header() {
             <Link to="/sveden/dokumenty" onClick={closeMenu}>Документы</Link>
             <Link to="/sveden/obrazovanie" onClick={closeMenu}>Образование</Link>
             <Link to="/sveden/rukovodstvo" onClick={closeMenu}>Руководство</Link>
-            <Link to="/sveden/pedagogicheskiy-sostav" onClick={closeMenu}>Педагогический состав</Link>
-            <Link to="/sveden/materialno-tehnicheskoe-obespechenie" onClick={closeMenu}>Материально-техническое обеспечение</Link>
+            <Link to="/sveden/pedagogicheskij-sostav" onClick={closeMenu}>Педагогический состав</Link>
+            <Link to="/sveden/materialno-tehnicheskoe-obespechenie-i-dostupnaya-sreda" onClick={closeMenu}>Материально-техническое обеспечение</Link>
             <Link to="/sveden/platnye-obrazovatelnye-uslugi" onClick={closeMenu}>Платные образовательные услуги</Link>
-            <Link to="/sveden/finansovo-hozyaystvennaya-deyatelnost" onClick={closeMenu}>Финансово-хозяйственная деятельность</Link>
-            <Link to="/sveden/vakantnye-mesta-dlya-priema" onClick={closeMenu}>Вакантные места для приема</Link>
-            <Link to="/sveden/stipendii-i-mery-podderzhki" onClick={closeMenu}>Стипендии и меры поддержки</Link>
-            <Link to="/sveden/obrazovatelnye-standarty-i-trebovaniya" onClick={closeMenu}>Образовательные стандарты</Link>
-            <Link to="/sveden/mezhdunarodnoe-sotrudnichestvo" onClick={closeMenu}>Международное сотрудничество</Link>
-            <Link to="/sveden/organizatsiya-pitaniya" onClick={closeMenu}>Организация питания</Link>
+            <Link to="/sveden/finansovo-hozyajstvennaya-deyatelnost" onClick={closeMenu}>Финансово-хозяйственная деятельность</Link>
+            <Link to="/sveden/vakantnye-mesta-dlya-priema-perevoda" onClick={closeMenu}>Вакантные места для приема</Link>
+            <Link to="/sveden/stipendiya-i-mery-podderzhki-obuchayushhihsya" onClick={closeMenu}>Стипендии и меры поддержки</Link>
+            <Link to="/sveden/obrazovatelnyj-standarty-i-trebovaniya" onClick={closeMenu}>Образовательные стандарты</Link>
+            <Link to="/sveden/education-section" onClick={closeMenu}>Международное сотрудничество</Link>
+            <Link to="/sveden/organizacziya-pitaniya" onClick={closeMenu}>Организация питания</Link>
             
           </div>
         )}
