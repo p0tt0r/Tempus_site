@@ -50,7 +50,7 @@ export default function NewsDetailPage() {
     <>
       <Header />
 
-      <main id="main" className="container page">
+      <main id="main" className="container news-page">
         {loading ? (
           <StatusMessage>Загрузка…</StatusMessage>
         ) : error ? (
@@ -68,6 +68,10 @@ export default function NewsDetailPage() {
               ← Все новости
             </Link>
 
+            {newsItem.date && <time className="news-date" dateTime={newsItem.date}>{formatDate(newsItem.date)}</time>}
+
+            <h1>{newsItem.title}</h1>
+
             {newsItem.image?.url && (
               <img
                 className="news-detail-image"
@@ -76,12 +80,8 @@ export default function NewsDetailPage() {
               />
             )}
 
-            {newsItem.date && <time className="news-date" dateTime={newsItem.date}>{formatDate(newsItem.date)}</time>}
-
-            <h1>{newsItem.title}</h1>
-
             {newsItem.content && (
-              <div className="news-detail-content rich-content">
+              <div className="news-detail-content">
                 <ReactMarkdown>{newsItem.content}</ReactMarkdown>
               </div>
             )}

@@ -169,13 +169,13 @@ export default function HomePage() {
             <StatusMessage>Новостей пока нет.</StatusMessage>
           )}
 
-          <div className="home-news-grid">
+          <div className="news-grid">
             {news.map((item) => (
-              <Link key={item.id} to={`/news/${item.slug}`} className="home-news-item">
+              <Link key={item.id} to={`/news/${item.slug}`} className="news-card">
                 {item.image?.url ? (
                   <img src={item.image.url} alt={item.title} />
                 ) : (
-                  <div className="home-news-placeholder" aria-hidden="true">
+                  <div className="news-image--placeholder" aria-hidden="true">
                     <img src="/logo-tempus1.png" alt="" />
                   </div>
                 )}

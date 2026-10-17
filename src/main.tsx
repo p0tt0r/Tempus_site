@@ -9,6 +9,7 @@ import './styles/header.css'
 import './styles/footer.css'
 import './styles/home.css'
 import './styles/sveden.css'
+import './styles/news.css'
 import './styles/low-vision.css'
 
 createRoot(document.getElementById('root')!).render(
