@@ -64,12 +64,16 @@ export default function NewsPage() {
               to={`/news/${item.slug}`}
               className="news-card"
             >
-              {item.image?.url && (
+              {item.image?.url ? (
                 <img
                   className="news-image"
                   src={`${item.image.url}`}
                   alt={item.title}
                 />
+              ) : (
+                <div className="news-image news-image--placeholder" aria-hidden="true">
+                  <img src="/logo-tempus1.png" alt="" />
+                </div>
               )}
 
               {item.date && (

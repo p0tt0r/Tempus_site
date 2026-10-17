@@ -452,6 +452,8 @@ h3 {
   border-radius: var(--radius);
   border: 1px solid #e3e9f2;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
 }
 
 .news-date {
@@ -470,6 +472,21 @@ h3 {
   object-fit: cover;
   border-radius: 14px;
   margin-bottom: 16px;
+}
+
+.news-image--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--blue-soft);
+}
+
+.news-image--placeholder img {
+  width: 72px;
+  height: auto;
+  opacity: 0.5;
+  object-fit: contain;
 }
 
 .news-detail {
@@ -1801,7 +1818,7 @@ h3 {
 /* CLICKABLE NEWS + SCROLL REVEAL */
 
 .home-news-card {
-  display: block !important;
+  display: flex !important;
   text-decoration: none !important;
   cursor: pointer !important;
   transition:
@@ -1826,7 +1843,9 @@ h3 {
 
 .read-more {
   display: inline-block !important;
-  margin-top: 14px !important;
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 12px;
   color: #2563eb !important;
   font-weight: 800 !important;
 }

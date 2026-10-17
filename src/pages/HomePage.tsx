@@ -101,7 +101,7 @@ export default function HomePage() {
           </p>
         </section>
 
-        <section className="container home-sectionr eveal">
+        <section className="container home-section">
           <div className="section-heading">
             <h2>Последние новости</h2>
             <Link to="/news">Все новости →</Link>
@@ -124,12 +124,16 @@ export default function HomePage() {
                 to={`/news/${item.slug}`}
                 className="news-card home-news-card reveal"
               >
-                {item.image?.url && (
+                {item.image?.url ? (
                   <img
                     className="news-image"
                     src={`${item.image.url}`}
                     alt={item.title}
                   />
+                ) : (
+                  <div className="news-image news-image--placeholder" aria-hidden="true">
+                    <img src="/logo-tempus1.png" alt="" />
+                  </div>
                 )}
 
                 {item.date && <time className="news-date" dateTime={item.date}>{formatDate(item.date)}</time>}
