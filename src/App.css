@@ -1765,10 +1765,29 @@ h3 {
   }
 
   .sveden-content,
-  .education-content,
   .home-about {
     padding: 30px 24px !important;
     border-radius: 26px !important;
+  }
+
+  .education-content {
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .sveden-document-card {
+    padding: 16px !important;
+    gap: 10px !important;
+  }
+
+  .sveden-document-card p,
+  .document-description {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--muted);
   }
 
   .rich-content,
