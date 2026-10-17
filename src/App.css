@@ -2368,3 +2368,26 @@ button {
   border-color: #fecaca;
   color: #991b1b;
 }
+
+/* 404 */
+.not-found-page p {
+  color: var(--muted);
+}
+
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.not-found-actions .btn.primary {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.not-found-actions .btn.secondary {
+  border-color: var(--border);
+  background: var(--white);
+  color: var(--blue);
+}
