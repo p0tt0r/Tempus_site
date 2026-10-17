@@ -91,7 +91,7 @@ export default function EducationSectionPage() {
             .catch((error) => console.error('Ошибка загрузки меню:', error));
 
         fetch(
-            `${API_URL}/api/education-sections?filters[slug][$eq]=${slug}&populate[documents][populate]=file`,
+            `${API_URL}/api/education-sections?filters[slug][$eq]=${encodeURIComponent(slug ?? '')}&populate[documents][populate]=file`,
         )
             .then((res) => {
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);

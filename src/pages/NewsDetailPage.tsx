@@ -28,7 +28,7 @@ export default function NewsDetailPage() {
     setLoading(true);
     setError(false);
     fetch(
-      `/api/articles?filters[slug][$eq]=${slug}&populate=image`,
+      `/api/articles?filters[slug][$eq]=${encodeURIComponent(slug ?? '')}&populate=image`,
     )
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
