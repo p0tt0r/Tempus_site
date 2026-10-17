@@ -4,12 +4,15 @@ import ReactMarkdown from 'react-markdown';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import StatusMessage from '../components/StatusMessage';
+import { formatFileInfo } from '../utils/fileInfo';
 
 const API_URL = '';
 
 type MediaFile = {
     url: string;
     name: string;
+    ext?: string;
+    size?: number;
 };
 
 type PageDocument = {
@@ -38,6 +41,10 @@ type OldDocumentItem = {
     order?: number;
     file?: MediaFile | null;
 };
+
+function getFirstFile(file?: MediaFile | MediaFile[] | null) {
+    return Array.isArray(file) ? file[0] : file;
+}
 
 function getFileUrl(file?: MediaFile | MediaFile[] | null) {
     if (!file) return null;
@@ -151,15 +158,10 @@ export default function EducationSectionPage() {
                                     <div className="sveden-documents">
                                         {documents.map((doc) => {
                                             const fileUrl = getFileUrl(doc.file);
+                                            const meta = formatFileInfo(getFirstFile(doc.file));
 
-                                            return (
-                                                <a
-                                                    key={doc.id}
-                                                    className="sveden-document-card"
-                                                    href={fileUrl || '#'}
-                                                    target="_blank"
-                                                    rel="noreferrer"
-                                                >
+                                            const content = (
+                                                <>
                                                     <div>
                                                         <h3>{doc.title}</h3>
 
@@ -172,8 +174,29 @@ export default function EducationSectionPage() {
                                                         )}
                                                     </div>
 
-                                                    {fileUrl && <strong>Скачать</strong>}
+                                                    {fileUrl && (
+                                                        <div className="file-action">
+                                                            <strong>Скачать</strong>
+                                                            {meta && <small className="file-meta">{meta}</small>}
+                                                        </div>
+                                                    )}
+                                                </>
+                                            );
+
+                                            return fileUrl ? (
+                                                <a
+                                                    key={doc.id}
+                                                    className="sveden-document-card"
+                                                    href={fileUrl}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    {content}
                                                 </a>
+                                            ) : (
+                                                <div key={doc.id} className="sveden-document-card">
+                                                    {content}
+                                                </div>
                                             );
                                         })}
                                     </div>
@@ -183,6 +206,7 @@ export default function EducationSectionPage() {
                                     <div className="sveden-documents ">
                                         {sectionDocuments.map((doc) => {
                                             const fileUrl = getFileUrl(doc.file);
+                                            const meta = formatFileInfo(getFirstFile(doc.file));
 
                                             return (
                                                 <div key={doc.id} className="sveden-document-card">
@@ -197,9 +221,12 @@ export default function EducationSectionPage() {
                                                     </div>
 
                                                     {fileUrl && (
-                                                        <a href={fileUrl} target="_blank" rel="noreferrer">
-                                                            Скачать
-                                                        </a>
+                                                        <div className="file-action">
+                                                            <a href={fileUrl} target="_blank" rel="noreferrer">
+                                                                Скачать
+                                                            </a>
+                                                            {meta && <small className="file-meta">{meta}</small>}
+                                                        </div>
                                                     )}
                                                 </div>
                                             );

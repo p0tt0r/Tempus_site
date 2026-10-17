@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import StatusMessage from '../components/StatusMessage';
+import { formatFileInfo } from '../utils/fileInfo';
 
 type LibraryItem = {
   id: number;
@@ -11,6 +12,8 @@ type LibraryItem = {
   file?: {
     url: string;
     name: string;
+    ext?: string;
+    size?: number;
   };
 };
 
@@ -54,22 +57,40 @@ export default function LibraryPage() {
         )}
 
         <div className="documents-list reveal">
-          {items.map((item) => (
-            <a
-              key={item.id}
-              className="document-item reveal"
-              href={item.file?.url ? `${item.file.url}` : '#'}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div>
-                <h3>{item.title}</h3>
-                {item.author && <p>{item.author}</p>}
-                {item.year && <span>{item.year}</span>}
+          {items.map((item) => {
+            const meta = formatFileInfo(item.file);
+            const content = (
+              <>
+                <div>
+                  <h3>{item.title}</h3>
+                  {item.author && <p>{item.author}</p>}
+                  {item.year && <span>{item.year}</span>}
+                </div>
+
+                {item.file?.url && (
+                  <div className="file-action">
+                    <strong>Скачать</strong>
+                    {meta && <small className="file-meta">{meta}</small>}
+                  </div>
+                )}
+              </>
+            );
+            return item.file?.url ? (
+              <a
+                key={item.id}
+                className="document-item reveal"
+                href={item.file.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {content}
+              </a>
+            ) : (
+              <div key={item.id} className="document-item reveal">
+                {content}
               </div>
-              <strong>Скачать</strong>
-            </a>
-          ))}
+            );
+          })}
         </div>
       </main>
       <Footer />

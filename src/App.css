@@ -2423,3 +2423,24 @@ h3 {
   background: var(--white);
   color: var(--blue);
 }
+
+/* FILE META */
+.file-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.file-meta {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .file-action {
+    align-items: flex-start;
+  }
+}
