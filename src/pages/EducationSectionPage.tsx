@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import type { Components } from 'react-markdown';
 import ReactMarkdown from 'react-markdown';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import StatusMessage from '../components/StatusMessage';
 import { formatFileInfo } from '../utils/fileInfo';
+import { programAnchor } from '../utils/programs';
 
 const API_URL = '';
 
@@ -56,8 +58,17 @@ function getFileUrl(file?: MediaFile | MediaFile[] | null) {
     return file.url ? `${API_URL}${file.url}` : null;
 }
 
+function chevron(open: boolean) {
+    return open ? (
+        <path d="M6 6l12 12M18 6L6 18" />
+    ) : (
+        <path d="M4 7h16M4 12h16M4 17h16" />
+    );
+}
+
 export default function EducationSectionPage() {
     const { slug } = useParams();
+    const { hash } = useLocation();
 
     const [section, setSection] = useState<Section | null>(null);
     const [sections, setSections] = useState<Section[]>([]);
@@ -107,6 +118,23 @@ export default function EducationSectionPage() {
         }
     }, [slug]);
 
+    // Якоря программ: i-й заголовок «# » получает id program-{i+1}, как на главной.
+    const h1Offsets: number[] =
+        slug === 'obrazovanie' && section?.content
+            ? Array.from(section.content.matchAll(/^# /gm), (m) => m.index ?? -1)
+            : [];
+    const markdownComponents: Components = {
+        h1({ node, children }) {
+            const index = h1Offsets.indexOf(node?.position?.start.offset ?? -2);
+            return <h1 id={index >= 0 ? programAnchor(index) : undefined}>{children}</h1>;
+        },
+    };
+
+    useEffect(() => {
+        if (loading || !section || !hash) return;
+        document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView();
+    }, [hash, section, loading]);
+
     const sectionDocuments = [...(section?.documents || [])].sort(
         (a, b) => (a.order ?? 9999) - (b.order ?? 9999),
     );
@@ -115,33 +143,40 @@ export default function EducationSectionPage() {
         <>
             <Header />
 
-            <main id="main" className="container page">
+            <main id="main" className="container sveden">
 
-                <button
-                    className="sidebar-toggle"
-                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                >
-                    {sidebarOpen ? "✕ Закрыть разделы" : "☰ Разделы сведений"}
-                </button>
+                <div className="sveden-layout">
+                    <button
+                        type="button"
+                        className="sveden-toggle"
+                        aria-expanded={sidebarOpen}
+                        aria-controls="sveden-nav"
+                        onClick={() => setSidebarOpen(!sidebarOpen)}
+                    >
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden="true">
+                            {chevron(sidebarOpen)}
+                        </svg>
+                        {sidebarOpen ? 'Закрыть разделы' : 'Разделы сведений'}
+                    </button>
 
-                <div className="education-layout">
-                    <aside
-                        className={`education-sidebar ${sidebarOpen ? "open" : ""
-                            }`}
+                    <nav
+                        id="sveden-nav"
+                        aria-label="Разделы сведений"
+                        className={`sveden-nav${sidebarOpen ? ' open' : ''}`}
                     >
                         {sections.map((item) => (
                             <Link
                                 key={item.id}
                                 to={`/sveden/${item.slug}`}
-                                className={item.slug === slug ? "active-link" : ""}
+                                aria-current={item.slug === slug ? 'page' : undefined}
                                 onClick={() => setSidebarOpen(false)}
                             >
                                 {item.title}
                             </Link>
                         ))}
-                    </aside>
+                    </nav>
 
-                    <section className="education-content">
+                    <section className="sveden-content">
                         {loading && <StatusMessage>Загрузка…</StatusMessage>}
 
                         {!loading && section ? (
@@ -149,8 +184,8 @@ export default function EducationSectionPage() {
                                 <h1>{section.title}</h1>
 
                                 {section.content?.trim() && (
-                                    <div className="section-content rich-content">
-                                        <ReactMarkdown>{section.content}</ReactMarkdown>
+                                    <div className="sveden-text">
+                                        <ReactMarkdown components={markdownComponents}>{section.content}</ReactMarkdown>
                                     </div>
                                 )}
 
@@ -186,7 +221,7 @@ export default function EducationSectionPage() {
                                             return fileUrl ? (
                                                 <a
                                                     key={doc.id}
-                                                    className="sveden-document-card"
+                                                    className="sveden-doc"
                                                     href={fileUrl}
                                                     target="_blank"
                                                     rel="noreferrer"
@@ -194,7 +229,7 @@ export default function EducationSectionPage() {
                                                     {content}
                                                 </a>
                                             ) : (
-                                                <div key={doc.id} className="sveden-document-card">
+                                                <div key={doc.id} className="sveden-doc">
                                                     {content}
                                                 </div>
                                             );
@@ -203,18 +238,18 @@ export default function EducationSectionPage() {
                                 )}
 
                                 {slug !== 'dokumenty' && sectionDocuments.length > 0 && (
-                                    <div className="sveden-documents ">
+                                    <div className="sveden-documents">
                                         {sectionDocuments.map((doc) => {
                                             const fileUrl = getFileUrl(doc.file);
                                             const meta = formatFileInfo(getFirstFile(doc.file));
 
                                             return (
-                                                <div key={doc.id} className="sveden-document-card">
+                                                <div key={doc.id} className="sveden-doc">
                                                     <div>
                                                         <h3>{doc.title}</h3>
 
                                                         {doc.description?.trim() && (
-                                                            <div className="document-description rich-content">
+                                                            <div className="sveden-text sveden-doc-desc">
                                                                 <ReactMarkdown>{doc.description}</ReactMarkdown>
                                                             </div>
                                                         )}

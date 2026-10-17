@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import StatusMessage from '../components/StatusMessage';
 
 export default function EducationInfoPage() {
   const navigate = useNavigate();
@@ -22,8 +23,8 @@ export default function EducationInfoPage() {
   return (
     <>
       <Header />
-      <main id="main" className="container page">
-        <p>Загрузка раздела...</p>
+      <main id="main" className="container sveden">
+        <StatusMessage>Загрузка раздела...</StatusMessage>
       </main>
       <Footer />
     </>
