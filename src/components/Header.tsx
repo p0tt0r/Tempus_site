@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -7,10 +7,32 @@ export default function Header() {
   const { pathname } = useLocation();
   const svedenActive = pathname.startsWith('/sveden');
 
+  const burgerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
   const closeMenu = () => {
     setMenuOpen(false);
     setSvedenOpen(false);
   };
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeRef.current?.focus();
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+        setSvedenOpen(false);
+        burgerRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [menuOpen]);
 
   return (
     <header className="site-header">
@@ -21,7 +43,11 @@ export default function Header() {
         </Link>
 
         <button
+          ref={burgerRef}
+          type="button"
           className="burger"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
           onClick={() => setMenuOpen(true)}
           aria-label="Открыть меню"
         >
@@ -78,12 +104,28 @@ export default function Header() {
 
       <div className={menuOpen ? 'mobile-overlay active' : 'mobile-overlay'} onClick={closeMenu}></div>
 
-      <aside className={menuOpen ? 'mobile-menu active' : 'mobile-menu'}>
-        <button className="mobile-close" onClick={closeMenu}>×</button>
+      <aside
+        id="mobile-menu"
+        aria-label="Меню"
+        inert={!menuOpen}
+        className={menuOpen ? 'mobile-menu active' : 'mobile-menu'}
+      >
+        <button
+          ref={closeRef}
+          type="button"
+          className="mobile-close"
+          aria-label="Закрыть меню"
+          onClick={() => {
+            closeMenu();
+            burgerRef.current?.focus();
+          }}
+        >×</button>
 
         <NavLink to="/" end onClick={closeMenu}>Главная</NavLink>
 
         <button
+          type="button"
+          aria-expanded={svedenOpen}
           className={svedenActive ? 'mobile-submenu-button active' : 'mobile-submenu-button'}
           onClick={() => setSvedenOpen(!svedenOpen)}
         >
